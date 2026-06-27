@@ -361,11 +361,9 @@ class VelabandonedreportformModel extends FormModel
 
                 // exit();
                 return $table->id;
-            } else {
-                return false;
             }
-        } else {
-            throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
+            return false;
         }
+        throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
     }
 }

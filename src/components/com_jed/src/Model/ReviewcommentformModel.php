@@ -228,9 +228,8 @@ class ReviewcommentformModel extends FormModel
             }
 
             return true;
-        } else {
-            throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
         }
+        throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
     }
 
     /**
@@ -264,9 +263,8 @@ class ReviewcommentformModel extends FormModel
             }
 
             return true;
-        } else {
-            throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
         }
+        throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
     }
 
 
@@ -311,12 +309,10 @@ class ReviewcommentformModel extends FormModel
 
             if ($table->save($data) === true) {
                 return $table->id;
-            } else {
-                return false;
             }
-        } else {
-            throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
+            return false;
         }
+        throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
     }
 
     /**
@@ -353,8 +349,7 @@ class ReviewcommentformModel extends FormModel
             }
 
             return $id;
-        } else {
-            throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
         }
+        throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
     }
 }

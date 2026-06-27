@@ -99,38 +99,38 @@ class VelreportsModel extends ListModel
 
         foreach ($items as $item) {
             if (!JedHelper::is_blank($item->pass_details_ok)) {
-                $item->pass_details_ok = Text::_('COM_JED_VEL_GENERAL_PASS_DETAILS_OK_OPTION_' . strtoupper($item->pass_details_ok));
+                $item->pass_details_ok = Text::_('COM_JED_VEL_GENERAL_PASS_DETAILS_OK_OPTION_' . strtoupper((string) $item->pass_details_ok));
             }
             if (!JedHelper::is_blank($item->vulnerability_type)) {
-                $item->vulnerability_type = Text::_('COM_JED_VEL_GENERAL_PASS_DETAILS_OK_OPTION_' . strtoupper($item->vulnerability_type));
+                $item->vulnerability_type = Text::_('COM_JED_VEL_GENERAL_PASS_DETAILS_OK_OPTION_' . strtoupper((string) $item->vulnerability_type));
             }
 
             if (!JedHelper::is_blank($item->exploit_type)) {
-                $item->exploit_type = Text::_('COM_JED_VEL_GENERAL_EXPLOIT_TYPE_OPTION_' . strtoupper($item->exploit_type));
+                $item->exploit_type = Text::_('COM_JED_VEL_GENERAL_EXPLOIT_TYPE_OPTION_' . strtoupper((string) $item->exploit_type));
             }
 
             if (!JedHelper::is_blank($item->vulnerability_actively_exploited)) {
-                $item->vulnerability_actively_exploited = Text::_('COM_JED_VEL_REPORTS_VULNERABILITY_ACTIVELY_EXPLOITED_OPTION_' . strtoupper($item->vulnerability_actively_exploited));
+                $item->vulnerability_actively_exploited = Text::_('COM_JED_VEL_REPORTS_VULNERABILITY_ACTIVELY_EXPLOITED_OPTION_' . strtoupper((string) $item->vulnerability_actively_exploited));
             }
 
             if (!JedHelper::is_blank($item->vulnerability_publicly_available)) {
-                $item->vulnerability_publicly_available = Text::_('COM_JED_VEL_REPORTS_VULNERABILITY_PUBLICLY_AVAILABLE_OPTION_' . strtoupper($item->vulnerability_publicly_available));
+                $item->vulnerability_publicly_available = Text::_('COM_JED_VEL_REPORTS_VULNERABILITY_PUBLICLY_AVAILABLE_OPTION_' . strtoupper((string) $item->vulnerability_publicly_available));
             }
 
             if (!JedHelper::is_blank($item->developer_communication_type)) {
-                $item->developer_communication_type = Text::_('COM_JED_VEL_GENERAL_DEVELOPER_COMMUNICATION_TYPE_OPTION_' . strtoupper($item->developer_communication_type));
+                $item->developer_communication_type = Text::_('COM_JED_VEL_GENERAL_DEVELOPER_COMMUNICATION_TYPE_OPTION_' . strtoupper((string) $item->developer_communication_type));
             }
 
             if (!JedHelper::is_blank($item->consent_to_process)) {
-                $item->consent_to_process = Text::_('COM_JED_GENERAL_CONSENT_TO_PROCESS_OPTION_' . strtoupper($item->consent_to_process));
+                $item->consent_to_process = Text::_('COM_JED_GENERAL_CONSENT_TO_PROCESS_OPTION_' . strtoupper((string) $item->consent_to_process));
             }
 
             if (!JedHelper::is_blank($item->passed_to_vel)) {
-                $item->passed_to_vel = Text::_('COM_JED_VEL_GENERAL_PASSED_TO_VEL_OPTION_' . strtoupper($item->passed_to_vel));
+                $item->passed_to_vel = Text::_('COM_JED_VEL_GENERAL_PASSED_TO_VEL_OPTION_' . strtoupper((string) $item->passed_to_vel));
             }
 
             if (!JedHelper::is_blank($item->data_source)) {
-                $item->data_source = Text::_('COM_JED_VEL_GENERAL_DATA_SOURCE_OPTION_' . strtoupper($item->data_source));
+                $item->data_source = Text::_('COM_JED_VEL_GENERAL_DATA_SOURCE_OPTION_' . strtoupper((string) $item->data_source));
             }
         }
 
@@ -179,8 +179,8 @@ class VelreportsModel extends ListModel
         $search = $this->getState('filter.search');
 
         if (!JedHelper::is_blank($search)) {
-            if (stripos($search, 'id:') === 0) {
-                $query->where('a.id = ' . (int) substr($search, 3));
+            if (stripos((string) $search, 'id:') === 0) {
+                $query->where('a.id = ' . (int) substr((string) $search, 3));
             } else {
                 $search = $db->Quote('%' . $db->escape($search, true) . '%');
                 $query->where('( a.vulnerable_item_name LIKE ' . $search . ' )');
@@ -215,7 +215,7 @@ class VelreportsModel extends ListModel
         $error_dateformat = false;
 
         foreach ($filters as $key => $value) {
-            if (strpos($key, '_dateformat') && !empty($value) && JedHelper::isValidDate($value) == null) {
+            if (strpos((string) $key, '_dateformat') && !empty($value) && JedHelper::isValidDate($value) == null) {
                 $filters[$key]    = '';
                 $error_dateformat = true;
             }

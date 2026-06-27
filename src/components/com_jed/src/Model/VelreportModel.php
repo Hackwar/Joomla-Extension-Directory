@@ -76,9 +76,8 @@ class VelreportModel extends ItemModel
             }
 
             return true;
-        } else {
-            throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
         }
+        throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
     }
 
     /**
@@ -275,8 +274,7 @@ class VelreportModel extends ItemModel
             }
 
             return true;
-        } else {
-            throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
         }
+        throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
     }
 }

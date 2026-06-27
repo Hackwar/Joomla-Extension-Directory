@@ -76,9 +76,8 @@ class TicketmessageformModel extends FormModel
             }
 
             return true;
-        } else {
-            throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
         }
+        throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
     }
 
     /**
@@ -112,9 +111,8 @@ class TicketmessageformModel extends FormModel
             }
 
             return true;
-        } else {
-            throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
         }
+        throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
     }
 
     /**
@@ -360,11 +358,9 @@ class TicketmessageformModel extends FormModel
 
             if ($table->save($data) === true) {
                 return $table->id;
-            } else {
-                return false;
             }
-        } else {
-            throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
+            return false;
         }
+        throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
     }
 }

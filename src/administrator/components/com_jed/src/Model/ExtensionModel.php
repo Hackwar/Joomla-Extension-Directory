@@ -298,7 +298,7 @@ class ExtensionModel extends AdminModel
         $data = Factory::getApplication()->getUserState('com_jed.edit.extension.data', []);
 
         if (empty($data)) {
-            $data = $this->getItem();
+            return $this->getItem();
         }
 
         return $data;

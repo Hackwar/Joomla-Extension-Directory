@@ -56,7 +56,7 @@ HTMLHelper::_('bootstrap.tooltip');
                     echo '<div class="taskheading">' . $task->heading . '</div>';
                     foreach ($task->instruction as $instruction) {
                         echo '<div class="taskdescription">' . date("H:i:s") . " - " . $instruction->description . '</div>';
-                        $instruction->sql = htmlspecialchars_decode($instruction->sql);
+                        $instruction->sql = htmlspecialchars_decode((string) $instruction->sql);
                         $sqlrows          = explode(";", $instruction->sql);
                         foreach ($sqlrows as $sql) {
                             //  echo '<div class="taskdescription">'.date().' - Q - '.$sql . '<br/><br/></div>';

@@ -47,7 +47,7 @@ echo LayoutHelper::render('review.guidelines', $this->extension_details);
             try {
                 /* @var $app \Joomla\CMS\Application\SiteApplication */
                 $app = Factory::getApplication();
-            } catch (Exception $e) {
+            } catch (Exception) {
             }
 
             $app->enqueueMessage(Text::_('COM_JED_REVIEW_NO_ACCESS'), 'success');
@@ -78,7 +78,7 @@ echo LayoutHelper::render('review.guidelines', $this->extension_details);
                     '<field name="supply_option_id" type="radio"         label="COM_JED_EXTENSION_SUPPLY_OPTION_ID_LABEL"           description="COM_JED_REVIEWS_SUPPLY_OPTION_ID_DESCR"
                default="' . $default . '" class="btn-group">      ' . $optionstr . '  </field>'
                 );
-            } catch (Exception $e) {
+            } catch (Exception) {
             }
 
             $field = $this->form->setField($xml);

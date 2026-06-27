@@ -98,7 +98,7 @@ class VelvulnerableitemsModel extends ListModel
 
 
         foreach ($items as $oneItem) {
-            $oneItem->status = Text::_('COM_JED_VEL_GENERAL_STATUS_OPTION_' . strtoupper($oneItem->status));
+            $oneItem->status = Text::_('COM_JED_VEL_GENERAL_STATUS_OPTION_' . strtoupper((string) $oneItem->status));
         }
 
         return $items;
@@ -157,8 +157,8 @@ class VelvulnerableitemsModel extends ListModel
         $search = $this->getState('filter.search');
 
         if (!empty($search)) {
-            if (stripos($search, 'id:') === 0) {
-                $query->where('a.id = ' . (int) substr($search, 3));
+            if (stripos((string) $search, 'id:') === 0) {
+                $query->where('a.id = ' . (int) substr((string) $search, 3));
             } else {
                 $search = $db->Quote('%' . $db->escape($search, true) . '%');
                 $query->where('( a.vulnerable_item_name LIKE ' . $search . '  OR  a.exploit_type LIKE ' . $search . ' )');

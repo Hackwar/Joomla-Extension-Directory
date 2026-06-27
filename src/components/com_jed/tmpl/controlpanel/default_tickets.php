@@ -118,7 +118,7 @@ $canCreate = $isLoggedIn;
                             <?php try {
                                 $d = new DateTime($item->created_on);
                                 echo $d->format("d M y H:i");
-                            } catch (Exception $e) {
+                            } catch (Exception) {
                             }
                             ?>
                         </td>

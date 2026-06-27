@@ -90,9 +90,8 @@ class ExtensionformModel extends FormModel
             }
 
             return $id;
-        } else {
-            throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
         }
+        throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
     }
 
     /**
@@ -302,9 +301,8 @@ class ExtensionformModel extends FormModel
             }
 
             return true;
-        } else {
-            throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
         }
+        throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
     }
 
     /**
@@ -424,9 +422,8 @@ class ExtensionformModel extends FormModel
 
         if (is_array($value)) {
             return array_values($value);
-        } else {
-            return array_values(json_decode($value));
         }
+        return array_values(json_decode((string) $value));
     }
     /**
      * Method to get a single record.

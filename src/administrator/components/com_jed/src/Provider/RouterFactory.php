@@ -24,24 +24,22 @@ use Joomla\DI\ServiceProviderInterface;
 class RouterFactory implements ServiceProviderInterface
 {
     /**
-     * The component's namespace
-     *
-     * @var string
-     *
-     * @since 4.0.0
-     */
-    private string $namespace;
-
-    /**
      * Router factory constructor.
      *
      * @param string $namespace The namespace
      *
      * @since 4.0.0
      */
-    public function __construct(string $namespace)
+    public function __construct(
+        /**
+         * The component's namespace
+         *
+         *
+         * @since 4.0.0
+         */
+        private readonly string $namespace
+    )
     {
-        $this->namespace = $namespace;
     }
 
     /**
@@ -53,14 +51,12 @@ class RouterFactory implements ServiceProviderInterface
     {
         $container->set(
             RouterFactoryInterface::class,
-            function (Container $container) {
-                return new \Jed\Component\Jed\Administrator\Service\RouterFactory(
-                    $this->namespace,
-                    $container->get(DatabaseInterface::class),
-                    $container->get(MVCFactoryInterface::class),
-                    $container->get(CategoryFactoryInterface::class)
-                );
-            }
+            fn(Container $container) => new \Jed\Component\Jed\Administrator\Service\RouterFactory(
+                $this->namespace,
+                $container->get(DatabaseInterface::class),
+                $container->get(MVCFactoryInterface::class),
+                $container->get(CategoryFactoryInterface::class)
+            )
         );
     }
 }

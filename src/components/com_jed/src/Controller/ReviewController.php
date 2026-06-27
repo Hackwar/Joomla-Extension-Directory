@@ -147,14 +147,12 @@ class ReviewController extends BaseController
                 $message = Text::_('JLIB_APPLICATION_ERROR_CHECKIN_FAILED');
                 $this->setRedirect(Route::_('index.php?option=com_jed&view=review' . '&id=' . $id, false), $message, 'error');
                 return false;
-            } else {
-                // Checkin succeeded.
-                $message = Text::_('COM_JED_CHECKEDIN_SUCCESSFULLY');
-                $this->setRedirect(Route::_('index.php?option=com_jed&view=review' . '&id=' . $id, false), $message);
-                return true;
             }
-        } else {
-            throw new Exception(Text::_('JERROR_ALERTNOAUTHOR'), 403);
+            // Checkin succeeded.
+            $message = Text::_('COM_JED_CHECKEDIN_SUCCESSFULLY');
+            $this->setRedirect(Route::_('index.php?option=com_jed&view=review' . '&id=' . $id, false), $message);
+            return true;
         }
+        throw new Exception(Text::_('JERROR_ALERTNOAUTHOR'), 403);
     }
 }

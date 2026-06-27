@@ -80,7 +80,7 @@ class TicketsModel extends ListModel
         $items = parent::getItems();
 
         foreach ($items as $oneItem) {
-            $oneItem->ticket_origin = Text::_('COM_JED_TICKETS_TICKET_ORIGIN_OPTION_' . strtoupper($oneItem->ticket_origin));
+            $oneItem->ticket_origin = Text::_('COM_JED_TICKETS_TICKET_ORIGIN_OPTION_' . strtoupper((string) $oneItem->ticket_origin));
 
             /*  if (isset($oneItem->ticket_category_type))
                 {
@@ -162,7 +162,7 @@ class TicketsModel extends ListModel
 
                 $oneItem->linked_item_type = !empty($textValue) ? implode(', ', $textValue) : $oneItem->linked_item_type;
             }*/
-            $oneItem->ticket_status = Text::_('COM_JED_TICKETS_TICKET_STATUS_OPTION_' . strtoupper($oneItem->ticket_status));
+            $oneItem->ticket_status = Text::_('COM_JED_TICKETS_TICKET_STATUS_OPTION_' . strtoupper((string) $oneItem->ticket_status));
         }
 
         return $items;
@@ -231,8 +231,8 @@ class TicketsModel extends ListModel
         $search = $this->getState('filter.search');
 
         if (!empty($search)) {
-            if (stripos($search, 'id:') === 0) {
-                $query->where('a.id = ' . (int) substr($search, 3));
+            if (stripos((string) $search, 'id:') === 0) {
+                $query->where('a.id = ' . (int) substr((string) $search, 3));
             } else {
                 $search = $db->Quote('%' . $db->escape($search, true) . '%');
                 $query->where('(jtc.categorytype LIKE ' . $search . '  OR  a.ticket_subject LIKE ' . $search . ' )');

@@ -95,12 +95,12 @@ class VelreportsModel extends ListModel
         $items = parent::getItems();
 
         foreach ($items as $oneItem) {
-            $oneItem->pass_details_ok    = Text::_('COM_JED_VEL_GENERAL_PASS_DETAILS_OK_OPTION_' . strtoupper($oneItem->pass_details_ok));
-            $oneItem->vulnerability_type = Text::_('COM_JED_VEL_GENERAL_VULNERABILITY_TYPE_OPTION_' . strtoupper($oneItem->vulnerability_type));
-            $oneItem->exploit_type       = Text::_('COM_JED_VEL_GENERAL_EXPLOIT_TYPE_OPTION_' . strtoupper($oneItem->exploit_type));
-            $oneItem->consent_to_process = Text::_('COM_JED_VEL_GENERAL_CONSENT_TO_PROCESS_OPTION_' . strtoupper($oneItem->consent_to_process));
-            $oneItem->passed_to_vel      = Text::_('COM_JED_VEL_GENERAL_PASSED_TO_VEL_OPTION_' . strtoupper($oneItem->passed_to_vel));
-            $oneItem->data_source        = Text::_('COM_JED_VEL_GENERAL_DATA_SOURCE_OPTION_' . strtoupper($oneItem->data_source));
+            $oneItem->pass_details_ok    = Text::_('COM_JED_VEL_GENERAL_PASS_DETAILS_OK_OPTION_' . strtoupper((string) $oneItem->pass_details_ok));
+            $oneItem->vulnerability_type = Text::_('COM_JED_VEL_GENERAL_VULNERABILITY_TYPE_OPTION_' . strtoupper((string) $oneItem->vulnerability_type));
+            $oneItem->exploit_type       = Text::_('COM_JED_VEL_GENERAL_EXPLOIT_TYPE_OPTION_' . strtoupper((string) $oneItem->exploit_type));
+            $oneItem->consent_to_process = Text::_('COM_JED_VEL_GENERAL_CONSENT_TO_PROCESS_OPTION_' . strtoupper((string) $oneItem->consent_to_process));
+            $oneItem->passed_to_vel      = Text::_('COM_JED_VEL_GENERAL_PASSED_TO_VEL_OPTION_' . strtoupper((string) $oneItem->passed_to_vel));
+            $oneItem->data_source        = Text::_('COM_JED_VEL_GENERAL_DATA_SOURCE_OPTION_' . strtoupper((string) $oneItem->data_source));
         }
 
         return $items;
@@ -143,8 +143,8 @@ class VelreportsModel extends ListModel
         $search = $this->getState('filter.search');
 
         if (!empty($search)) {
-            if (stripos($search, 'id:') === 0) {
-                $query->where('a.id = ' . (int) substr($search, 3));
+            if (stripos((string) $search, 'id:') === 0) {
+                $query->where('a.id = ' . (int) substr((string) $search, 3));
             } else {
                 $search = $db->Quote('%' . $db->escape($search, true) . '%');
                 $query->where('( a.vulnerable_item_name LIKE ' . $search . '  OR  a.exploit_type LIKE ' . $search . ' )');

@@ -41,7 +41,7 @@ trait ExtensionUtilities
         // Remove images
         $d = preg_replace("/\!\[(.*)\]\((.*)\)/", '', $d);
         // Remove links
-        $d = preg_replace("/\[(.*)\]\((.*)\)/", '', $d);
+        $d = preg_replace("/\[(.*)\]\((.*)\)/", '', (string) $d);
         $d = Markdown::defaultTransform($d);
 
         $clean = (stripslashes(trim($d)));

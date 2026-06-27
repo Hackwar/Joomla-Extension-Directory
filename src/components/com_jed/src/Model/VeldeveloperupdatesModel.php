@@ -83,11 +83,11 @@ class VeldeveloperupdatesModel extends ListModel
 
         foreach ($items as $item) {
             if (!empty($item->consent_to_process)) {
-                $item->consent_to_process = Text::_('COM_JED_GENERAL_CONSENT_TO_PROCESS_OPTION_' . strtoupper($item->consent_to_process));
+                $item->consent_to_process = Text::_('COM_JED_GENERAL_CONSENT_TO_PROCESS_OPTION_' . strtoupper((string) $item->consent_to_process));
             }
 
             if (!empty($item->update_data_source)) {
-                $item->update_data_source = Text::_('COM_JED_VEL_GENERAL_DATA_SOURCE_OPTION_' . strtoupper($item->update_data_source));
+                $item->update_data_source = Text::_('COM_JED_VEL_GENERAL_DATA_SOURCE_OPTION_' . strtoupper((string) $item->update_data_source));
             }
         }
 
@@ -133,8 +133,8 @@ class VeldeveloperupdatesModel extends ListModel
         $search = $this->getState('filter.search');
 
         if (!empty($search)) {
-            if (stripos($search, 'id:') === 0) {
-                $query->where('a.id = ' . (int) substr($search, 3));
+            if (stripos((string) $search, 'id:') === 0) {
+                $query->where('a.id = ' . (int) substr((string) $search, 3));
             } else {
                 $search = $db->Quote('%' . $db->escape($search, true) . '%');
                 $query->where('( a.vulnerable_item_name LIKE ' . $search . ' )');
@@ -168,7 +168,7 @@ class VeldeveloperupdatesModel extends ListModel
         $error_dateformat = false;
 
         foreach ($filters as $key => $value) {
-            if (strpos($key, '_dateformat') && !empty($value) && JedHelper::isValidDate($value) == null) {
+            if (strpos((string) $key, '_dateformat') && !empty($value) && JedHelper::isValidDate($value) == null) {
                 $filters[$key]    = '';
                 $error_dateformat = true;
             }

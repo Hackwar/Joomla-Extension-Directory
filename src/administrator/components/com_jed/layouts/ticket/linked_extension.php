@@ -30,7 +30,7 @@ try {
         ->useScript('webcomponent.field-fancy-select')
         ->useStyle('com_jed.Tickets')
         ->useStyle('com_jed.jquery_dataTables');
-} catch (Exception $e) {
+} catch (Exception) {
 }
 $headerlabeloptions = ['hiddenLabel' => true];
 $fieldhiddenoptions = ['hidden' => true];

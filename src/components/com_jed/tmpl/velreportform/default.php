@@ -43,7 +43,7 @@ if (!$isLoggedIn) {
         $app = Factory::getApplication();
         $app->enqueueMessage(Text::_('COM_JED_VEL_REPORTS_NO_ACCESS'), 'success');
         $app->redirect($redirectURL);
-    } catch (Exception $e) {
+    } catch (Exception) {
     }
 } else {
     ?>

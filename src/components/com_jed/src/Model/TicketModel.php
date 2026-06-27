@@ -76,9 +76,8 @@ class TicketModel extends ItemModel
             }
 
             return true;
-        } else {
-            throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
         }
+        throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
     }
 
     /**
@@ -113,9 +112,8 @@ class TicketModel extends ItemModel
             }
 
             return true;
-        } else {
-            throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
         }
+        throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
     }
 
     /**
@@ -189,7 +187,7 @@ class TicketModel extends ItemModel
 
             $values = (is_array($this->item->ticket_category_type)) ? $this->item->ticket_category_type : explode(
                 ',',
-                $this->item->ticket_category_type
+                (string) $this->item->ticket_category_type
             );
 
             $textValue = [];
@@ -224,7 +222,7 @@ class TicketModel extends ItemModel
 
             $values = (is_array($this->item->allocated_group)) ? $this->item->allocated_group : explode(
                 ',',
-                $this->item->allocated_group
+                (string) $this->item->allocated_group
             );
 
             $textValue = [];
@@ -263,7 +261,7 @@ class TicketModel extends ItemModel
 
             $values = (is_array($this->item->linked_item_type)) ? $this->item->linked_item_type : explode(
                 ',',
-                $this->item->linked_item_type
+                (string) $this->item->linked_item_type
             );
 
             $textValue = [];
@@ -408,9 +406,8 @@ class TicketModel extends ItemModel
             $table->state = $state;
 
             return $table->store();
-        } else {
-            throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
         }
+        throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
     }
 
 
@@ -421,7 +418,7 @@ class TicketModel extends ItemModel
      *
      * @since 4.0
      */
-    public function getMessages()
+    public function getMessages(): never
     {
         $db = $this->getDatabase();
         echo "<pre>";

@@ -59,12 +59,12 @@ HTMLHelper::_('bootstrap.tooltip');
 
         <tr>
             <th><?php echo Text::_('COM_JED_TICKETS_TICKET_TEXT_LABEL'); ?></th>
-            <td><?php echo nl2br($this->item->ticket_text); ?></td>
+            <td><?php echo nl2br((string) $this->item->ticket_text); ?></td>
         </tr>
 
         <tr>
             <th><?php echo Text::_('COM_JED_TICKETS_INTERNAL_NOTES_LABEL'); ?></th>
-            <td><?php echo nl2br($this->item->internal_notes); ?></td>
+            <td><?php echo nl2br((string) $this->item->internal_notes); ?></td>
         </tr>
 
         <tr>

@@ -41,7 +41,7 @@ if (!$isLoggedIn) {
     try {
         /* @var $app \Joomla\CMS\Application\SiteApplication */
         $app = Factory::getApplication();
-    } catch (Exception $e) {
+    } catch (Exception) {
     }
 
     $app->enqueueMessage(Text::_('COM_JED_TICKET_NO_ACCESS'), 'success');

@@ -82,15 +82,15 @@ class VelabandonedreportsModel extends ListModel
 
         foreach ($items as $item) {
             if (!JedHelper::is_blank($item->consent_to_process)) {
-                $item->consent_to_process = Text::_('COM_JED_GENERAL_CONSENT_TO_PROCESS_OPTION_' . strtoupper($item->consent_to_process));
+                $item->consent_to_process = Text::_('COM_JED_GENERAL_CONSENT_TO_PROCESS_OPTION_' . strtoupper((string) $item->consent_to_process));
             }
 
             if (!JedHelper::is_blank($item->passed_to_vel)) {
-                $item->passed_to_vel = Text::_('COM_JED_VEL_GENERAL_PASSED_TO_VEL_OPTION_' . strtoupper($item->passed_to_vel));
+                $item->passed_to_vel = Text::_('COM_JED_VEL_GENERAL_PASSED_TO_VEL_OPTION_' . strtoupper((string) $item->passed_to_vel));
             }
 
             if (!JedHelper::is_blank($item->data_source)) {
-                $item->data_source = Text::_('COM_JED_VEL_GENERAL_DATA_SOURCE_OPTION_' . strtoupper($item->data_source));
+                $item->data_source = Text::_('COM_JED_VEL_GENERAL_DATA_SOURCE_OPTION_' . strtoupper((string) $item->data_source));
             }
         }
 
@@ -136,8 +136,8 @@ class VelabandonedreportsModel extends ListModel
         $search = $this->getState('filter.search');
 
         if (!JedHelper::is_blank($search)) {
-            if (stripos($search, 'id:') === 0) {
-                $query->where('a.id = ' . (int) substr($search, 3));
+            if (stripos((string) $search, 'id:') === 0) {
+                $query->where('a.id = ' . (int) substr((string) $search, 3));
             } else {
                 $search = $db->Quote('%' . $db->escape($search, true) . '%');
                 $query->where('( a.extension_name LIKE ' . $search . ' )');
@@ -172,7 +172,7 @@ class VelabandonedreportsModel extends ListModel
         $error_dateformat = false;
 
         foreach ($filters as $key => $value) {
-            if (strpos($key, '_dateformat') && !empty($value) && JedHelper::isValidDate($value) == null) {
+            if (strpos((string) $key, '_dateformat') && !empty($value) && JedHelper::isValidDate($value) == null) {
                 $filters[$key]    = '';
                 $error_dateformat = true;
             }

@@ -166,7 +166,7 @@ $canState = $this->getCurrentUser()->authorise('core.edit.state', 'com_jed');
                     echo '<div class="control-label"><label>Current Logo:</label></div>';
                     echo '<div class="controls">';
                     echo '<a href="' . htmlspecialchars(\Joomla\CMS\Uri\Uri::root() . $this->item->logo) . '" target="_blank">';
-                    echo htmlspecialchars(basename($this->item->logo));
+                    echo htmlspecialchars(basename((string) $this->item->logo));
                     echo '</a>';
                     echo '</div>';
                     echo '</div>';
@@ -210,7 +210,7 @@ $canState = $this->getCurrentUser()->authorise('core.edit.state', 'com_jed');
                     if (!empty($this->item->varied[$st->supply_id]->file)) {
                         $fieldsets['extensionfile']['description'] .= '<div style="margin-top:10px;"><strong>Current file:</strong> ';
                         $fieldsets['extensionfile']['description'] .= '<a href="' . htmlspecialchars(\Joomla\CMS\Uri\Uri::root() . $this->item->varied[$st->supply_id]->file) . '" target="_blank">';
-                        $fieldsets['extensionfile']['description'] .= htmlspecialchars(basename($this->item->varied[$st->supply_id]->file));
+                        $fieldsets['extensionfile']['description'] .= htmlspecialchars(basename((string) $this->item->varied[$st->supply_id]->file));
                         $fieldsets['extensionfile']['description'] .= '</a></div>';
                     }
                     $fieldsets['links']['supply_type']         = $st->supply_type;

@@ -82,9 +82,9 @@ class ExtensionHistoryTable extends Table
                 $src['alias'] = OutputFilter::stringURLSafe(date('Y-m-d H:i:s'));
             } else {
                 if ($app->get('unicodeslugs') == 1) {
-                    $src['alias'] = OutputFilter::stringURLUnicodeSlug(trim($src['title']));
+                    $src['alias'] = OutputFilter::stringURLUnicodeSlug(trim((string) $src['title']));
                 } else {
-                    $src['alias'] = OutputFilter::stringURLSafe(trim($src['title']));
+                    $src['alias'] = OutputFilter::stringURLSafe(trim((string) $src['title']));
                 }
             }
         }
@@ -255,7 +255,7 @@ class ExtensionHistoryTable extends Table
         $db    = $this->getDatabase();
         $query = $db->getQuery(true);
 
-        $categories        = explode(',', $this->primary_category_id);
+        $categories        = explode(',', (string) $this->primary_category_id);
         $andWhereCondition = [];
         foreach ($categories as $categoryid) {
             $andWhereCondition[] = $db->quoteName('primary_category_id') . ' like "%' . $categoryid . '%"';

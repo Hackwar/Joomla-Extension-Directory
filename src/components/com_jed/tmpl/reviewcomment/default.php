@@ -62,7 +62,7 @@ if (!$canEdit && $this->getCurrentUser()->authorise('core.edit.own', 'com_jed'))
 
         <tr>
             <th><?php echo Text::_('COM_JED_REVIEWCOMMENTS_COMMENTS_LABEL'); ?></th>
-            <td><?php echo nl2br($this->item->comments); ?></td>
+            <td><?php echo nl2br((string) $this->item->comments); ?></td>
         </tr>
 
     </table>

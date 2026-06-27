@@ -80,9 +80,9 @@ class MessagetemplateTable extends Table
         if (isset($src['email_type'])) {
             if (is_array($src['email_type'])) {
                 $src['email_type'] = implode(',', $src['email_type']);
-            } elseif (strpos($src['email_type'], ',') != false) {
-                $src['email_type'] = explode(',', $src['email_type']);
-            } elseif (strlen($src['email_type']) == 0) {
+            } elseif (str_contains((string) $src['email_type'], ',')) {
+                $src['email_type'] = explode(',', (string) $src['email_type']);
+            } elseif (strlen((string) $src['email_type']) == 0) {
                 $src['email_type'] = '';
             }
         } else {

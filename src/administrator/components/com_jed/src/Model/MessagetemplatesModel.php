@@ -71,8 +71,8 @@ class MessagetemplatesModel extends ListModel
         $items = parent::getItems();
 
         foreach ($items as $oneItem) {
-            $oneItem->email_type    = Text::_('COM_JED_MESSAGETEMPLATES_FIELD_EMAIL_TYPE_OPTION_' . strtoupper($oneItem->email_type));
-            $oneItem->ticket_status = Text::_('COM_JED_TICKETS_TICKET_STATUS_OPTION_' . strtoupper($oneItem->ticket_status));
+            $oneItem->email_type    = Text::_('COM_JED_MESSAGETEMPLATES_FIELD_EMAIL_TYPE_OPTION_' . strtoupper((string) $oneItem->email_type));
+            $oneItem->ticket_status = Text::_('COM_JED_TICKETS_TICKET_STATUS_OPTION_' . strtoupper((string) $oneItem->ticket_status));
         }
 
         return $items;
@@ -123,8 +123,8 @@ class MessagetemplatesModel extends ListModel
         $search = $this->getState('filter.search');
 
         if (!empty($search)) {
-            if (stripos($search, 'id:') === 0) {
-                $query->where('a.id = ' . (int) substr($search, 3));
+            if (stripos((string) $search, 'id:') === 0) {
+                $query->where('a.id = ' . (int) substr((string) $search, 3));
             } else {
                 $search = $db->Quote('%' . $db->escape($search, true) . '%');
                 $query->where('( a.title LIKE ' . $search . '  OR  a.subject LIKE ' . $search . ' )');

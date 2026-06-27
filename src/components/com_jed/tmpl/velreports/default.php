@@ -43,7 +43,7 @@ $redirectURL = JedHelper::getLoginlink();
 try {
     $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
     $wa->useStyle('com_jed.list');
-} catch (Exception $e) {
+} catch (Exception) {
 }
 
 if (!$isLoggedIn) {
@@ -52,7 +52,7 @@ if (!$isLoggedIn) {
         $app = Factory::getApplication();
         $app->enqueueMessage(Text::_('COM_JED_VEL_REPORTS_NO_ACCESS'), 'success');
         $app->redirect($redirectURL);
-    } catch (Exception $e) {
+    } catch (Exception) {
     }
 } else {
     ?>

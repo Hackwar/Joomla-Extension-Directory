@@ -78,9 +78,9 @@ class VelabandonedreportsModel extends ListModel
     {
         $items = parent::getItems();
         foreach ($items as $oneItem) {
-            $oneItem->consent_to_process = Text::_('COM_JED_VEL_GENERAL_FIELD_CONSENT_TO_PROCESS_OPTION_' . strtoupper($oneItem->consent_to_process));
-            $oneItem->passed_to_vel      = Text::_('COM_JED_VEL_GENERAL_PASSED_TO_VEL_OPTION_' . strtoupper($oneItem->passed_to_vel));
-            $oneItem->data_source        = Text::_('COM_JED_VEL_GENERAL_DATA_SOURCE_OPTION_' . trim(strtoupper($oneItem->data_source)));
+            $oneItem->consent_to_process = Text::_('COM_JED_VEL_GENERAL_FIELD_CONSENT_TO_PROCESS_OPTION_' . strtoupper((string) $oneItem->consent_to_process));
+            $oneItem->passed_to_vel      = Text::_('COM_JED_VEL_GENERAL_PASSED_TO_VEL_OPTION_' . strtoupper((string) $oneItem->passed_to_vel));
+            $oneItem->data_source        = Text::_('COM_JED_VEL_GENERAL_DATA_SOURCE_OPTION_' . trim(strtoupper((string) $oneItem->data_source)));
         }
 
 
@@ -124,8 +124,8 @@ class VelabandonedreportsModel extends ListModel
         $search = $this->getState('filter.search');
 
         if (!empty($search)) {
-            if (stripos($search, 'id:') === 0) {
-                $query->where('a.id = ' . (int) substr($search, 3));
+            if (stripos((string) $search, 'id:') === 0) {
+                $query->where('a.id = ' . (int) substr((string) $search, 3));
             } else {
                 $search = $db->Quote('%' . $db->escape($search, true) . '%');
                 $query->where('( a.extension_name LIKE ' . $search . ' )');

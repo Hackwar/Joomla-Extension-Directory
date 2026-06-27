@@ -232,7 +232,7 @@ class CategoryModel extends ListModel
 
         $listOrder = $app->getUserStateFromRequest('com_content.category.list.' . $itemid . '.filter_order_Dir', 'filter_order_Dir', '', 'cmd');
 
-        if (!\in_array(strtoupper($listOrder), ['ASC', 'DESC', ''])) {
+        if (!\in_array(strtoupper((string) $listOrder), ['ASC', 'DESC', ''])) {
             $listOrder = 'ASC';
         }
 
@@ -313,8 +313,8 @@ class CategoryModel extends ListModel
         $search = $this->getState('filter.search');
 
         if (!empty($search)) {
-            if (stripos($search, 'id:') === 0) {
-                $query->where('a.id = ' . (int)substr($search, 3));
+            if (stripos((string) $search, 'id:') === 0) {
+                $query->where('a.id = ' . (int)substr((string) $search, 3));
             } else {
                 $search = $db->Quote('%' . $db->escape($search, true) . '%');
                 $query->where('(title LIKE ' . $search);
@@ -420,7 +420,7 @@ class CategoryModel extends ListModel
             // https://extensions.joomla.org/cache/fab_image/27824_resizeDown400px175px16.png
 
             if (!empty($item->uses_updater)) {
-                $item->uses_updater = Text::_('COM_JED_EXTENSION_USES_UPDATER_OPTION_' . strtoupper($item->uses_updater));
+                $item->uses_updater = Text::_('COM_JED_EXTENSION_USES_UPDATER_OPTION_' . strtoupper((string) $item->uses_updater));
             }
             $item->version = JedtrophyHelper::getTrophyVersionsString($item->joomla_versions);
         }
@@ -449,7 +449,7 @@ class CategoryModel extends ListModel
         $error_dateformat = false;
 
         foreach ($filters as $key => $value) {
-            if (strpos($key, '_dateformat') && !empty($value) && JedHelper::isValidDate($value) == null) {
+            if (strpos((string) $key, '_dateformat') && !empty($value) && JedHelper::isValidDate($value) == null) {
                 $filters[$key]    = '';
                 $error_dateformat = true;
             }

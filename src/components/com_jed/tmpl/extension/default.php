@@ -166,7 +166,7 @@ $wa->useStyle('com_jed.jazstyle');
                 <div class="jed-grid__item">
                     <div class="jed-subitem-intro mb-2">
                          <?php echo $this->item->intro_text ?>
-                        <?php if (!empty(trim(strip_tags($this->item->description)))) : ?>
+                        <?php if (!empty(trim(strip_tags((string) $this->item->description)))) : ?>
                             <?php HTMLHelper::_('bootstrap.collapse') ?>
                             <button type="button" class="btn btn-sm btn-outline-secondary my-2"
                                     data-bs-toggle="collapse" href="#description-<?php echo $subItemId ?>"

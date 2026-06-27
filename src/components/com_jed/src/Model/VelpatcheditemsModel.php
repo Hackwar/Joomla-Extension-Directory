@@ -96,8 +96,8 @@ class VelpatcheditemsModel extends ListModel
         $search = $this->getState('filter.search');
 
         if (!empty($search)) {
-            if (stripos($search, 'id:') === 0) {
-                $query->where('a.id = ' . (int) substr($search, 3));
+            if (stripos((string) $search, 'id:') === 0) {
+                $query->where('a.id = ' . (int) substr((string) $search, 3));
             } else {
                 $search = $db->Quote('%' . $db->escape($search, true) . '%');
                 $query->where('( a.title LIKE ' . $search . ' )');
@@ -143,7 +143,7 @@ class VelpatcheditemsModel extends ListModel
         }
         if (empty($direction)) {
             $direction = $app->getUserStateFromRequest($this->context . '.filter_order_Dir', 'filter_order_Dir', $app->get('filter_order_Dir', ''));
-            if (!in_array(strtoupper($direction), ['ASC', 'DESC', ''])) {
+            if (!in_array(strtoupper((string) $direction), ['ASC', 'DESC', ''])) {
                 $direction = "DESC";
             }
             $this->setState('list.direction', $direction);

@@ -105,7 +105,7 @@ class HtmlView extends BaseHtmlView
      *
      * @since 4.0.0
      */
-    protected mixed $linked_form;
+    protected mixed $linked_form = null;
 
     /**
      * The linked Form data

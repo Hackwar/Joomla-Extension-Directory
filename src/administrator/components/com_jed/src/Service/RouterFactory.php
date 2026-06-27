@@ -26,39 +26,6 @@ use RuntimeException;
 class RouterFactory implements RouterFactoryInterface
 {
     /**
-     * The category factory object for ATS
-     *
-     * @var   CategoryFactoryInterface
-     * @since 4.0.0
-     */
-    private CategoryFactoryInterface $categoryFactory;
-
-    /**
-     * The database factory object
-     *
-     * @var   DatabaseInterface
-     * @since 4.0.0
-     */
-    private DatabaseInterface $db;
-
-    /**
-     * THe MVC factory object
-     *
-     * @var   MVCFactoryInterface
-     * @since 4.0.0
-     */
-    private MVCFactoryInterface $factory;
-
-    /**
-     * The extension's namespace
-     *
-     * @var   string
-     * @since 4.0.0
-     */
-    private string $namespace;
-
-
-    /**
      * Class constructor.
      *
      * @param string                   $namespace
@@ -67,12 +34,33 @@ class RouterFactory implements RouterFactoryInterface
      * @param CategoryFactoryInterface $categoryFactory
      * @since 4.0.0
      */
-    public function __construct(string $namespace, DatabaseInterface $db, MVCFactoryInterface $factory, CategoryFactoryInterface $categoryFactory)
+    public function __construct(
+        /**
+         * The extension's namespace
+         *
+         * @since 4.0.0
+         */
+        private readonly string $namespace,
+        /**
+         * The database factory object
+         *
+         * @since 4.0.0
+         */
+        private readonly DatabaseInterface $db,
+        /**
+         * THe MVC factory object
+         *
+         * @since 4.0.0
+         */
+        private readonly MVCFactoryInterface $factory,
+        /**
+         * The category factory object for ATS
+         *
+         * @since 4.0.0
+         */
+        private readonly CategoryFactoryInterface $categoryFactory
+    )
     {
-        $this->namespace       = $namespace;
-        $this->factory         = $factory;
-        $this->db              = $db;
-        $this->categoryFactory = $categoryFactory;
     }
 
 

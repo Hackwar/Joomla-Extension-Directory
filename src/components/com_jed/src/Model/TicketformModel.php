@@ -86,9 +86,8 @@ class TicketformModel extends FormModel
             }
 
             return true;
-        } else {
-            throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
         }
+        throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
     }
 
     /**
@@ -122,9 +121,8 @@ class TicketformModel extends FormModel
             }
 
             return true;
-        } else {
-            throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
         }
+        throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
     }
 
     /**
@@ -215,7 +213,7 @@ class TicketformModel extends FormModel
                     // Convert the Table to a clean stdClass.
                     $this->item                       = ArrayHelper::toObject(ArrayHelper::fromObject($table), stdClass::class);
                     $this->item->ticket_messages      = self::getTicketMessages($id);
-                    $this->item->ticket_status        = Text::_('COM_JED_TICKETS_TICKET_STATUS_OPTION_' . strtoupper($this->item->ticket_status));
+                    $this->item->ticket_status        = Text::_('COM_JED_TICKETS_TICKET_STATUS_OPTION_' . strtoupper((string) $this->item->ticket_status));
                     $this->item->ticket_category_type = self::getTicketCategory($this->item->ticket_category_type);
                     if (isset($this->item->category_id) && is_object($this->item->category_id)) {
                         $this->item->category_id = ArrayHelper::fromObject($this->item->category_id);
@@ -325,7 +323,7 @@ class TicketformModel extends FormModel
         $data = Factory::getApplication()->getUserState('com_jed.edit.ticket.data', []);
 
         if (empty($data)) {
-            $data = $this->getItem();
+            return $this->getItem();
         }
 
 
@@ -412,14 +410,11 @@ class TicketformModel extends FormModel
                 }
 
                 return $table->id;
-            } else {
-                echo "can't save";
-
-                return false;
             }
-        } else {
-            throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
+            echo "can't save";
+            return false;
         }
+        throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
     }
 
 

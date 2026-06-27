@@ -57,7 +57,7 @@ if (!$canEdit && $this->getCurrentUser()->authorise('core.edit.own', 'com_jed'))
 
         <tr>
             <th><?php echo Text::_('COM_JED_REVIEWS_BODY_LABEL'); ?></th>
-            <td><?php echo nl2br($this->item->body); ?></td>
+            <td><?php echo nl2br((string) $this->item->body); ?></td>
         </tr>
 
         <tr>

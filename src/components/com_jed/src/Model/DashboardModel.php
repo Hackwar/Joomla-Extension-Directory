@@ -124,7 +124,7 @@ class DashboardModel extends ItemModel
         $items = $db->loadObjectList() ?: [];
 
         foreach ($items as $item) {
-            $item->ticket_status = Text::_('COM_JED_TICKETS_TICKET_STATUS_OPTION_' . strtoupper($item->ticket_status));
+            $item->ticket_status = Text::_('COM_JED_TICKETS_TICKET_STATUS_OPTION_' . strtoupper((string) $item->ticket_status));
         }
 
         return $items;

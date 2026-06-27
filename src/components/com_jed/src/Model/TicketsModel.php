@@ -82,10 +82,10 @@ class TicketsModel extends ListModel
         $items = parent::getItems();
 
         foreach ($items as $oneItem) {
-            $oneItem->ticket_origin = Text::_('COM_JED_TICKETS_TICKET_ORIGIN_OPTION_' . strtoupper($oneItem->ticket_origin));
+            $oneItem->ticket_origin = Text::_('COM_JED_TICKETS_TICKET_ORIGIN_OPTION_' . strtoupper((string) $oneItem->ticket_origin));
 
 
-            $oneItem->ticket_status = Text::_('COM_JED_TICKETS_TICKET_STATUS_OPTION_' . strtoupper($oneItem->ticket_status));
+            $oneItem->ticket_status = Text::_('COM_JED_TICKETS_TICKET_STATUS_OPTION_' . strtoupper((string) $oneItem->ticket_status));
         }
 
         return $items;
@@ -154,8 +154,8 @@ class TicketsModel extends ListModel
         $search = $this->getState('filter.search');
 
         if (!empty($search)) {
-            if (stripos($search, 'id:') === 0) {
-                $query->where('a.id = ' . (int) substr($search, 3));
+            if (stripos((string) $search, 'id:') === 0) {
+                $query->where('a.id = ' . (int) substr((string) $search, 3));
             } else {
                 $search = $db->Quote('%' . $db->escape($search, true) . '%');
                 $query->where('(jtc.categorytype LIKE ' . $search . '  OR  a.ticket_subject LIKE ' . $search . ' )');
@@ -205,7 +205,7 @@ class TicketsModel extends ListModel
         $error_dateformat = false;
 
         foreach ($filters as $key => $value) {
-            if (strpos($key, '_dateformat') && !empty($value) && JedHelper::isValidDate($value) == null) {
+            if (strpos((string) $key, '_dateformat') && !empty($value) && JedHelper::isValidDate($value) == null) {
                 $filters[$key]    = '';
                 $error_dateformat = true;
             }
@@ -250,7 +250,7 @@ class TicketsModel extends ListModel
         }
         if (empty($direction)) {
             $direction = $app->getUserStateFromRequest($this->context . '.filter_order_Dir', 'filter_order_Dir', $app->get('filter_order_Dir', ''));
-            if (!in_array(strtoupper($direction), ['ASC', 'DESC', ''])) {
+            if (!in_array(strtoupper((string) $direction), ['ASC', 'DESC', ''])) {
                 $direction = 'ASC';
             }
             $this->setState('list.direction', $direction);

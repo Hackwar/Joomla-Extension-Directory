@@ -104,9 +104,8 @@ class ExtensionsupplyoptionModel extends AdminModel
 
 
             return $item;
-        } else {
-            throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
         }
+        throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
     }
 
     /**

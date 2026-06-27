@@ -112,7 +112,7 @@ class JedHelper
         }
 
         $params = ComponentHelper::getParams('com_jed');
-        $cdnUrl = rtrim($params->get('cdn_url', 'https://extensionscdn.joomla.org'), '/');
+        $cdnUrl = rtrim((string) $params->get('cdn_url', 'https://extensionscdn.joomla.org'), '/');
 
         $lastDot      = strrpos($filename, '.');
         $partialName  = substr($filename, 0, $lastDot - 1);
@@ -208,23 +208,14 @@ class JedHelper
      */
     public static function getApprovedIcon(int $state): string
     {
-        switch ($state) { //Rejected
-            case '-1':
-                $icon = 'unpublish';
-                break;
-            case '1':// Approved
-                $icon = 'publish';
-                break;
-
-            case '2':// Awaiting response
-                $icon = 'expired';
-                break;
-
-            case '0':// Pending
-            default:
-                $icon = 'pending';
-                break;
-        }
+        $icon = match ((string) $state) {
+            '-1' => 'unpublish',
+            // Approved
+            '1' => 'publish',
+            // Awaiting response
+            '2' => 'expired',
+            default => 'pending',
+        };
 
         return '<span class="icon-' . $icon . '" aria-hidden="true"></span>';
     }
@@ -251,7 +242,7 @@ class JedHelper
 
         $db->setQuery($query);
 
-        return explode(',', $db->loadResult());
+        return explode(',', (string) $db->loadResult());
     }
 
     /**
@@ -264,23 +255,14 @@ class JedHelper
      */
     public static function getPublishedIcon(int $state): string
     {
-        switch ($state) { //Rejected
-            case '-1':
-                $icon = 'unpublish';
-                break;
-            case '1':// Approved
-                $icon = 'publish';
-                break;
-
-            case '2':// Awaiting response
-                $icon = 'expired';
-                break;
-
-            case '0':// Pending
-            default:
-                $icon = 'pending';
-                break;
-        }
+        $icon = match ((string) $state) {
+            '-1' => 'unpublish',
+            // Approved
+            '1' => 'publish',
+            // Awaiting response
+            '2' => 'expired',
+            default => 'pending',
+        };
 
         return '<span class="icon-' . $icon . '" aria-hidden="true"></span>';
     }

@@ -35,7 +35,7 @@ use Joomla\Registry\Registry;
  */
 class HtmlView extends BaseHtmlView
 {
-    public ?Form $filterForm;
+    public ?Form $filterForm = null;
     public array $activeFilters = [];
     public string $sidebar;
     protected array $items = [];

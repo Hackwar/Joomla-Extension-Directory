@@ -84,7 +84,7 @@ $wa->useStyle('com_jed.jazstyle');
                                     if (!empty($item->created_on)) {
                                         try {
                                             echo (new DateTime($item->created_on))->format('d M Y');
-                                        } catch (Exception $e) {
+                                        } catch (Exception) {
                                         }
                                     }
                                     ?>
@@ -168,7 +168,7 @@ $wa->useStyle('com_jed.jazstyle');
                                     if (!empty($item->created_on)) {
                                         try {
                                             echo (new DateTime($item->created_on))->format('d M Y');
-                                        } catch (Exception $e) {
+                                        } catch (Exception) {
                                         }
                                     }
                                     ?>
@@ -223,7 +223,7 @@ $wa->useStyle('com_jed.jazstyle');
                                     if (!empty($item->created_on)) {
                                         try {
                                             echo (new DateTime($item->created_on))->format('d M Y H:i');
-                                        } catch (Exception $e) {
+                                        } catch (Exception) {
                                         }
                                     }
                                     ?>

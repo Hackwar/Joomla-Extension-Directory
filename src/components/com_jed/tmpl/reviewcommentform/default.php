@@ -28,7 +28,7 @@ $lang = Factory::getApplication()->getLanguage();
 $lang->load('com_jed', JPATH_SITE);
 
 $user    = $this->getCurrentUser();
-$canEdit = JedHelper::canUserEdit($this->item, $user);
+$canEdit = JedHelper::canUserEdit($this->item);
 
 
 if ($this->item->state == 1) {

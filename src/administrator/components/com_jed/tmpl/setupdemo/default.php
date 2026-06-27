@@ -388,7 +388,7 @@ HTMLHelper::_('bootstrap.tooltip');
                     foreach ($menuitems as $m) {
                         $mi               = new MenuTable($db);
                         $mi->menutype     = 'jeddemo';
-                        $mi->title        = htmlspecialchars_decode($m['title']);
+                        $mi->title        = htmlspecialchars_decode((string) $m['title']);
                         $mi->alias        = $m['alias'] . '-jvp';
                         $mi->path         = $m['path'];
                         $mi->link         = $m['link'];

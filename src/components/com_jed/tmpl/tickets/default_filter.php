@@ -40,7 +40,7 @@ if ($filters !== false) {
     $filled       = false;
 
     foreach ($filterFields as $filterField) {
-        $filterField = substr($filterField, 7);
+        $filterField = substr((string) $filterField, 7);
         $filter      = $data['view']->getState('filter.' . $filterField);
 
         if (!empty($filter)) {
@@ -67,7 +67,7 @@ try {
         'searchFieldSelector' => '#filter_search',
         'orderFieldSelector'  => '#list_fullordering',
     ];
-} catch (Exception $e) {
+} catch (Exception) {
 }
 
 $data['options'] = array_unique(array_merge($customOptions, $data['options']));

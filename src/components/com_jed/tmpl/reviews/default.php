@@ -38,7 +38,7 @@ $canDelete  = $user->authorise('core.delete', 'com_jed');
 // Import CSS
 try {
     $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
-} catch (Exception $e) {
+} catch (Exception) {
 }
 $wa->useStyle('com_jed.list');
 ?>

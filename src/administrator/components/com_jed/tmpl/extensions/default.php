@@ -31,7 +31,7 @@ use Joomla\CMS\Router\Route;
 */
 try {
     $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
-} catch (Exception $e) {
+} catch (Exception) {
 }
 $wa->getRegistry()
     ->addExtensionRegistryFile('com_jed');
@@ -131,49 +131,23 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
                             </td>
                             <td class="center" width="50">
                                 <?php
-                                switch ($item->published) {
-                                    // Rejected
-                                    case '-1':
-                                        $icon = 'unpublish';
-                                        break;
-                                        // Approved
-                                    case '1':
-                                        $icon = 'publish';
-                                        break;
-                                        // Awaiting response
-                                    case '2':
-                                        $icon = 'expired';
-                                        break;
-                                        // Pending
-                                    case '0':
-                                    default:
-                                        $icon = 'pending';
-                                        break;
-                                }
+                                $icon = match ($item->published) {
+                            '-1' => 'unpublish',
+                            '1' => 'publish',
+                            '2' => 'expired',
+                            default => 'pending',
+                        };
                                 echo '<span class="icon-' . $icon . '" aria-hidden="true"></span>';
                                 ?>
                             </td>
                             <td>
                                 <?php
-                                switch ($item->approved) {
-                                    // Rejected
-                                    case '-1':
-                                        $icon = 'unpublish';
-                                        break;
-                                // Approved
-                                    case '1':
-                                        $icon = 'publish';
-                                        break;
-                                // Awaiting response
-                                    case '2':
-                                        $icon = 'expired';
-                                        break;
-                                // Pending
-                                    case '0':
-                                    default:
-                                        $icon = 'pending';
-                                        break;
-                                }
+                                $icon = match ($item->approved) {
+                                    '-1' => 'unpublish',
+                                    '1' => 'publish',
+                                    '2' => 'expired',
+                                    default => 'pending',
+                                };
                                 echo '<span class="icon-' . $icon . '" aria-hidden="true"></span>';
                                 ?>
                             </td>

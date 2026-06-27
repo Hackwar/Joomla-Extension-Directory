@@ -41,7 +41,7 @@ class HtmlView extends BaseHtmlView
      * @var   Form|null
      * @since 4.0.0
      */
-    public ?Form $filterForm;
+    public ?Form $filterForm = null;
 
     public string $sidebar;
     /**

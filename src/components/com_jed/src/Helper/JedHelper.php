@@ -460,9 +460,8 @@ class JedHelper
 
         if ($user->id > 0) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -516,7 +515,7 @@ class JedHelper
         }
 
         $params = ComponentHelper::getParams('com_jed');
-        $cdnUrl = rtrim($params->get('cdn_url', 'https://extensionscdn.joomla.org'), '/');
+        $cdnUrl = rtrim((string) $params->get('cdn_url', 'https://extensionscdn.joomla.org'), '/');
 
         $lastDot      = strrpos($filename, '.');
         $partialName  = substr($filename, 0, $lastDot - 1);
@@ -675,9 +674,8 @@ class JedHelper
             $results = $db->loadObject();
             if ($results) {
                 return true;
-            } else {
-                return false;
             }
+            return false;
         } catch (Exception $exc) {
             throw new Exception($exc->getMessage(), $exc->getCode());
         }

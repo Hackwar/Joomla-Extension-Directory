@@ -70,7 +70,7 @@ if (!$canEdit && $this->getCurrentUser()->authorise('core.edit.own', 'com_jed'))
 
         <tr>
             <th><?php echo Text::_('COM_JED_VEL_ABANDONEDREPORTS_ABANDONED_REASON_LABEL'); ?></th>
-            <td><?php echo nl2br($this->item->abandoned_reason); ?></td>
+            <td><?php echo nl2br((string) $this->item->abandoned_reason); ?></td>
         </tr>
 
         <tr>

@@ -62,7 +62,7 @@ class JedextensionsField extends ListField
 
     private string $option_value_field;
 
-    private string $limit;
+    private readonly string $limit;
 
     /**
      * Method to get the field input markup.
@@ -275,8 +275,7 @@ class JedextensionsField extends ListField
     {
         if (!empty($this->element[$name])) {
             return $this->element[$name];
-        } else {
-            return $default;
         }
+        return $default;
     }
 }

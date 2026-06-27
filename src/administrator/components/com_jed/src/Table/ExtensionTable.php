@@ -199,7 +199,7 @@ class ExtensionTable extends Table
         $db    = $this->getDatabase();
         $query = $db->getQuery(true);
 
-        $categories        = explode(',', $this->primary_category_id);
+        $categories        = explode(',', (string) $this->primary_category_id);
         $andWhereCondition = [];
         foreach ($categories as $categoryid) {
             $andWhereCondition[] = $db->quoteName('primary_category_id') . ' like "%' . $categoryid . '%"';

@@ -71,17 +71,17 @@ if (!is_null($this->item)) {
 
             <tr>
                 <th><?php echo Text::_('COM_JED_VEL_GENERAL_EXPLOIT_OTHER_DESCRIPTION_LABEL'); ?></th>
-                <td><?php echo nl2br($this->item->exploit_other_description); ?></td>
+                <td><?php echo nl2br((string) $this->item->exploit_other_description); ?></td>
             </tr>
 
             <tr>
                 <th><?php echo Text::_('COM_JED_VEL_GENERAL_VULNERABILITY_DESCRIPTION_LABEL'); ?></th>
-                <td><?php echo nl2br($this->item->vulnerability_description); ?></td>
+                <td><?php echo nl2br((string) $this->item->vulnerability_description); ?></td>
             </tr>
 
             <tr>
                 <th><?php echo Text::_('COM_JED_VEL_GENERAL_VULNERABILITY_HOW_FOUND_LABEL'); ?></th>
-                <td><?php echo nl2br($this->item->vulnerability_how_found); ?></td>
+                <td><?php echo nl2br((string) $this->item->vulnerability_how_found); ?></td>
             </tr>
 
             <tr>
@@ -101,7 +101,7 @@ if (!is_null($this->item)) {
 
             <tr>
                 <th><?php echo Text::_('COM_JED_VEL_GENERAL_VULNERABILITY_SPECIFIC_IMPACT_LABEL'); ?></th>
-                <td><?php echo nl2br($this->item->vulnerability_specific_impact); ?></td>
+                <td><?php echo nl2br((string) $this->item->vulnerability_specific_impact); ?></td>
             </tr>
 
             <tr>
@@ -141,7 +141,7 @@ if (!is_null($this->item)) {
 
             <tr>
                 <th><?php echo Text::_('COM_JED_VEL_GENERAL_DEVELOPER_ADDITIONAL_INFO_LABEL'); ?></th>
-                <td><?php echo nl2br($this->item->developer_additional_info); ?></td>
+                <td><?php echo nl2br((string) $this->item->developer_additional_info); ?></td>
             </tr>
 
             <tr>

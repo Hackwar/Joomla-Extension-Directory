@@ -38,7 +38,7 @@ try {
         ->useScript('webcomponent.field-fancy-select')
         ->useStyle('com_jed.Tickets')
         ->useStyle('com_jed.jquery_dataTables');
-} catch (Exception $e) {
+} catch (Exception) {
 }
 
 Text::script('COM_JED_EXTENSION_ERROR_DURING_SEND_EMAIL_LABEL', true);

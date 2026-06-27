@@ -36,7 +36,7 @@ $saveOrder = $listOrder == 'a.`ordering`';
 
 if ($saveOrder) {
     $saveOrderingUrl = 'index.php?option=com_jed&task=velvulnerableitems.saveOrderAjax&tmpl=component';
-    HTMLHelper::_('sortablelist.sortable', 'velvulnerableitemList', 'adminForm', strtolower($listDirn), $saveOrderingUrl);
+    HTMLHelper::_('sortablelist.sortable', 'velvulnerableitemList', 'adminForm', strtolower((string) $listDirn), $saveOrderingUrl);
 }
 
 // $sortFields = $this->getSortFields();

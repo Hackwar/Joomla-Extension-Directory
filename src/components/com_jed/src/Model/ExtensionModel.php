@@ -110,9 +110,8 @@ class ExtensionModel extends ItemModel
             }
 
             return true;
-        } else {
-            throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
         }
+        throw new Exception(Text::_("JERROR_ALERTNOAUTHOR"), 401);
     }
 
     /**
@@ -464,7 +463,7 @@ class ExtensionModel extends ItemModel
         $msg = [];
 
         if ($row && (int)$row->core_state === 0) {
-            $code = json_decode($row->code);
+            $code = json_decode((string) $row->code);
 
             if (!empty($code)) {
                 $document->setTitle($row->title . ' - Joomla! Extension Directory');

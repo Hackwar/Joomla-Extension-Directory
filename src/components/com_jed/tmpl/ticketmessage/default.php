@@ -37,7 +37,7 @@ if (!$canEdit && $this->getCurrentUser()->authorise('core.edit.own', 'com_jed'))
 
         <tr>
             <th><?php echo Text::_('COM_JED_EXTENSION_MESSAGE_LABEL'); ?></th>
-            <td><?php echo nl2br($this->item->message); ?></td>
+            <td><?php echo nl2br((string) $this->item->message); ?></td>
         </tr>
 
         <tr>

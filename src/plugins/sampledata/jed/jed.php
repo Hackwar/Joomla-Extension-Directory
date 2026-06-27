@@ -259,7 +259,7 @@ class PlgSampledataJed extends CMSPlugin
 
         foreach ($queries as $query) {
             // Trim any whitespace.
-            $query = trim($query);
+            $query = trim((string) $query);
 
             // If the query isn't empty and is not a MySQL or PostgreSQL comment, execute it.
             if (!empty($query) && ($query[0] != '#') && ($query[0] != '-')) {
@@ -304,7 +304,7 @@ class PlgSampledataJed extends CMSPlugin
         $query = preg_replace("/\n\--[^\n]*/", '', "\n" . $query);
 
         // Find function.
-        $funct = explode('CREATE OR REPLACE FUNCTION', $query);
+        $funct = explode('CREATE OR REPLACE FUNCTION', (string) $query);
 
         // Save sql before function and parse it.
         $query = $funct[0];

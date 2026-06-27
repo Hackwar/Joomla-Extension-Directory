@@ -158,8 +158,8 @@ class ExtensionsModel extends ListModel
         $search = $this->getState('filter.search');
 
         if (!empty($search)) {
-            if (stripos($search, 'id:') === 0) {
-                $query->where('a.id = ' . (int) substr($search, 3));
+            if (stripos((string) $search, 'id:') === 0) {
+                $query->where('a.id = ' . (int) substr((string) $search, 3));
             } else {
                 $search = $db->quote('%' . $db->escape($search, true) . '%');
                 $query->where($db->quoteName('varied.title') . ' LIKE ' . $search);
@@ -211,13 +211,13 @@ class ExtensionsModel extends ListModel
         $developer = $this->getState('filter.developer', '');
 
         if ($developer !== '') {
-            $query->where($db->quoteName('users.name') . ' LIKE "%' . trim($developer) . '%"');
+            $query->where($db->quoteName('users.name') . ' LIKE "%' . trim((string) $developer) . '%"');
         }
         $query->group($db->quoteName('a.id'));
 
         // Add the list ordering clause.
         $orderCol  = $this->state->get('list.ordering', 'a.id');
-        $orderDirn = strtoupper($this->state->get('list.direction', 'DESC')) === 'ASC' ? 'ASC' : 'DESC';
+        $orderDirn = strtoupper((string) $this->state->get('list.direction', 'DESC')) === 'ASC' ? 'ASC' : 'DESC';
 
         if ($orderCol && in_array($orderCol, $this->filter_fields, true)) {
             $query->order($db->quoteName($orderCol) . ' ' . $orderDirn);

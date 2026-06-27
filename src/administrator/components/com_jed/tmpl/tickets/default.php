@@ -101,7 +101,7 @@ if ($saveOrder) {
                     </tr>
                     </tfoot>
                     <tbody <?php if ($saveOrder) :
-                        ?> class="js-draggable" data-url="<?php echo $saveOrderingUrl; ?>" data-direction="<?php echo strtolower($listDirn); ?>" <?php
+                        ?> class="js-draggable" data-url="<?php echo $saveOrderingUrl; ?>" data-direction="<?php echo strtolower((string) $listDirn); ?>" <?php
                            endif; ?>>
                     <?php foreach ($this->items as $i => $item) :
                         $ordering   = ($listOrder == 'a.ordering');
@@ -134,7 +134,7 @@ if ($saveOrder) {
 
                                 <?php try {
                                     $d = new DateTime($item->created_on);
-                                } catch (Exception $e) {
+                                } catch (Exception) {
                                 }
                                 echo $d->format("d M y H:i"); ?>
                             </td>

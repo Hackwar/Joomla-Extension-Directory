@@ -54,7 +54,7 @@ class HtmlView extends BaseHtmlView
      * @var   Form|null
      * @since 4.0.0
      */
-    protected mixed $form;
+    protected mixed $form = null;
 
     /**
      * Get the Params

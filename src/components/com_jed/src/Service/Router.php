@@ -47,14 +47,6 @@ class Router extends RouterView
      */
     private array $categoryCache = [];
 
-    /**
-     * The category factory
-     *
-     * @var   CategoryFactoryInterface
-     * @since 4.0.0
-     */
-    private CategoryFactoryInterface $categoryFactory;
-
 
     /**
      * Class constructor.
@@ -67,11 +59,14 @@ class Router extends RouterView
      *
      * @since 4.0.0
      */
-    public function __construct(SiteApplication $app, AbstractMenu $menu, DatabaseInterface $db, MVCFactory $factory, CategoryFactoryInterface $categoryFactory)
+    public function __construct(SiteApplication $app, AbstractMenu $menu, DatabaseInterface $db, MVCFactory $factory, /**
+     * The category factory
+     *
+     * @since 4.0.0
+     */
+    private CategoryFactoryInterface $categoryFactory)
     {
         parent::__construct($app, $menu);
-
-        $this->categoryFactory = $categoryFactory;
         $this->setDatabase($db);
         $this->setMVCFactory($factory);
 
@@ -252,7 +247,7 @@ class Router extends RouterView
             $path[0] = '1:root';
 
             foreach ($path as &$segment) {
-                [$id, $segment] = explode(':', $segment, 2);
+                [$id, $segment] = explode(':', (string) $segment, 2);
             }
 
             return $path;
@@ -284,7 +279,7 @@ class Router extends RouterView
      */
     public function getExtensionSegment($id, $query): array
     {
-        if (strpos($id, ':')) {
+        if (strpos((string) $id, ':')) {
             return [(int) $id => $id];
         }
 
