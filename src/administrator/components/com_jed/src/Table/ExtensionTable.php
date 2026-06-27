@@ -72,7 +72,7 @@ class ExtensionTable extends Table
     {
         $date = Factory::getDate();
         $app  = Factory::getApplication();
-        $task = $app->input->get('task');
+        $task = $app->getInput()->get('task');
         $user = $app->getIdentity();
 
 

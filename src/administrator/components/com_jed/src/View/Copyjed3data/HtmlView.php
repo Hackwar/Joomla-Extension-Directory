@@ -116,7 +116,7 @@ class HtmlView extends BaseHtmlView
         $this->params      = ComponentHelper::getParams('com_jed');
         $this->migrate_xml = $this->getMigrateXML();
         $app               = Factory::getApplication();
-        $input             = $app->input->getInputForRequestMethod();
+        $input             = $app->getInput()->getInputForRequestMethod();
         $this->task        = $input->get('task', '');
 
         $this->addToolbar();

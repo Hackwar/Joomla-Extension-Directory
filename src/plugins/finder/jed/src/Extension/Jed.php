@@ -28,7 +28,7 @@ use Joomla\Registry\Registry;
 /**
  * Smart Search adapter for com_jed.
  */
-final class Jed extends Adapter
+final class Jed extends Adapter implements \Joomla\Event\SubscriberInterface
 {
     use DatabaseAwareTrait;
 
@@ -351,5 +351,9 @@ final class Jed extends Adapter
             ->join('LEFT', '#__users AS u ON u.id = a.created_by');
 
         return $query;
+    }
+    public static function getSubscribedEvents(): array
+    {
+        return ['onFinderCategoryChangeState' => 'onFinderCategoryChangeState', 'onFinderAfterDelete' => 'onFinderAfterDelete', 'onFinderAfterSave' => 'onFinderAfterSave', 'onFinderBeforeSave' => 'onFinderBeforeSave', 'onFinderChangeState' => 'onFinderChangeState'];
     }
 }

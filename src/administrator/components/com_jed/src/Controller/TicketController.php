@@ -270,7 +270,7 @@ class TicketController extends FormController
     {
         //  Session::checkToken('post') or die;
         $app     = Factory::getApplication();
-        $camp_id = $app->input->get('itemId', 0, 'int');
+        $camp_id = $app->getInput()->get('itemId', 0, 'int');
         $db      = Factory::getContainer()->get('DatabaseDriver');
 
 

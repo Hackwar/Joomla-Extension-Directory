@@ -130,8 +130,8 @@ class ExtensionimageTable extends Table
 
         // Support multi file field: filename
         $app   = Factory::getApplication();
-        $files = $app->input->files->get('jform', [], 'raw');
-        $array = $app->input->get('jform', [], 'ARRAY');
+        $files = $app->getInput()->files->get('jform', [], 'raw');
+        $array = $app->getInput()->get('jform', [], 'ARRAY');
 
         if ($files['filename'][0]['size'] > 0) {
             // Deleting existing files

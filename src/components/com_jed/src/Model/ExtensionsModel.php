@@ -114,7 +114,7 @@ class ExtensionsModel extends ListModel
 
         $this->setState('list.limit', $value);
 
-        $value = $app->input->get('limitstart', 0, 'uint');
+        $value = $app->getInput()->get('limitstart', 0, 'uint');
         $this->setState('list.start', $value);
 
         $ordering  = $this->getUserStateFromRequest($this->context . '.filter_order', 'filter_order', 'a.id');
@@ -126,7 +126,7 @@ class ExtensionsModel extends ListModel
 
         $app->setUserState($this->context . '.list', $list);
 
-        $this->setState($this->context . 'catid', $app->input->getInt('id', 0));
+        $this->setState($this->context . 'catid', $app->getInput()->getInt('id', 0));
 
         $context = $this->getUserStateFromRequest($this->context . '.filter.search', 'filter_search');
         $this->setState('filter.search', $context);

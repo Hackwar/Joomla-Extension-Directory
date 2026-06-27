@@ -74,7 +74,7 @@ class TicketmessageformController extends FormController
 
         // Get the previous edit id (if any) and the current edit id.
         $previousId = (int) $app->getUserState('com_jed.edit.ticketmessage.id');
-        $editId     = $app->input->getInt('id', 0);
+        $editId     = $app->getInput()->getInt('id', 0);
 
         // Set the user id for the user to edit in the session.
         $app->setUserState('com_jed.edit.ticketmessage.id', $editId);
@@ -108,7 +108,7 @@ class TicketmessageformController extends FormController
     {
         $app   = Factory::getApplication();
         $model = $this->getModel('Ticketmessageform', 'Site');
-        $pk    = $app->input->getInt('id');
+        $pk    = $app->getInput()->getInt('id');
 
         // Attempt to save the data
         try {

@@ -100,7 +100,7 @@ class ReviewscommentsModel extends ListModel
 
         $this->setState('list.limit', $value);
 
-        $value = $app->input->get('limitstart', 0, 'uint');
+        $value = $app->getInput()->get('limitstart', 0, 'uint');
         $this->setState('list.start', $value);
 
         $ordering  = $this->getUserStateFromRequest($this->context . '.filter_order', 'filter_order', 'a.id');

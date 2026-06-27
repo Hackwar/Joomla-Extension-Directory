@@ -50,7 +50,7 @@ class ExtensionformController extends FormController
 
         // Get the previous edit id (if any) and the current edit id.
         $previousId = (int) $app->getUserState('com_jed.edit.extension.id');
-        $editId     = $app->input->getInt('id', 0);
+        $editId     = $app->getInput()->getInt('id', 0);
 
         // Set the user id for the user to edit in the session.
         $app->setUserState('com_jed.edit.extension.id', $editId);
@@ -96,7 +96,7 @@ class ExtensionformController extends FormController
             $model->setUseExceptions(true);
 
             // Raw payload (includes subforms)
-            $dataRaw = $app->input->get('jform', [], 'array');
+            $dataRaw = $app->getInput()->get('jform', [], 'array');
 
             // Keep the tabbed varied payload aside (main form validation doesn't know about it)
             $supplyPayload = $dataRaw['supply'] ?? [];

@@ -80,7 +80,7 @@ class VelreportformController extends FormController
 
         // Get the previous edit id (if any) and the current edit id.
         $previousId = (int) $app->getUserState('com_jed.edit.velreport.id');
-        $editId     = $app->input->getInt('id', 0);
+        $editId     = $app->getInput()->getInt('id', 0);
 
         // Set the user id for the user to edit in the session.
         $app->setUserState('com_jed.edit.velreport.id', $editId);

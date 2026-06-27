@@ -243,12 +243,12 @@ class TicketmessagesModel extends ListModel
         }
 
         $list['limit']     = $app->getUserStateFromRequest($this->context . '.list.limit', 'limit', $app->get('list_limit'), 'uint');
-        $list['start']     = $app->input->getInt('start', 0);
+        $list['start']     = $app->getInput()->getInt('start', 0);
         $list['ordering']  = $ordering;
         $list['direction'] = $direction;
 
         $app->setUserState($this->context . '.list', $list);
-        $app->input->set('list', null);
+        $app->getInput()->set('list', null);
 
 
         // List state information.

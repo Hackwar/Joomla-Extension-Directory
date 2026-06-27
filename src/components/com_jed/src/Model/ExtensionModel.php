@@ -521,7 +521,7 @@ class ExtensionModel extends ItemModel
         if (Factory::getApplication()->input->get('layout') == 'edit') {
             $id = $app->getUserState('com_jed.edit.extension.id');
         } else {
-            $id = $app->input->get('id');
+            $id = $app->getInput()->get('id');
             $app->setUserState('com_jed.edit.extension.id', $id);
         }
 

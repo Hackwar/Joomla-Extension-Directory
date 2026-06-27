@@ -28,7 +28,7 @@ use Joomla\Database\DatabaseDriver;
  *
  * @since  4.0.0
  */
-class PlgSampledataJed extends CMSPlugin
+class PlgSampledataJed extends CMSPlugin implements \Joomla\Event\SubscriberInterface
 {
     /**
      * Database object
@@ -110,20 +110,20 @@ class PlgSampledataJed extends CMSPlugin
 
         $this->importFile(__DIR__ . '/sql/step2.sql');
 
-        $this->db->setQuery('SELECT id FROM #__assets WHERE name = \'com_jed\'');
-        $component_asset_id = $this->db->loadResult();
-        $this->db->setQuery('DELETE FROM `#__assets` WHERE parent_id = \'' . $component_asset_id . '\';');
-        $this->db->execute();
-        $this->db->setQuery('INSERT INTO `#__assets` (parent_id, LEVEL, NAME, title, rules) SELECT ' . $component_asset_id . ' AS parent_id, level + 1 AS LEVEL, CONCAT(\'com_jed.category.\', id) AS NAME, title, \'{}\' AS rules FROM `#__categories` WHERE extension = \'com_jed\'');
-        $this->db->execute();
+        $this->getDatabase()->setQuery('SELECT id FROM #__assets WHERE name = \'com_jed\'');
+        $component_asset_id = $this->getDatabase()->loadResult();
+        $this->getDatabase()->setQuery('DELETE FROM `#__assets` WHERE parent_id = \'' . $component_asset_id . '\';');
+        $this->getDatabase()->execute();
+        $this->getDatabase()->setQuery('INSERT INTO `#__assets` (parent_id, LEVEL, NAME, title, rules) SELECT ' . $component_asset_id . ' AS parent_id, level + 1 AS LEVEL, CONCAT(\'com_jed.category.\', id) AS NAME, title, \'{}\' AS rules FROM `#__categories` WHERE extension = \'com_jed\'');
+        $this->getDatabase()->execute();
 
-        $this->db->setQuery('SELECT id FROM #__assets WHERE name = \'com_jed.category.9\'');
-        $asset_id = $this->db->loadResult();
+        $this->getDatabase()->setQuery('SELECT id FROM #__assets WHERE name = \'com_jed.category.9\'');
+        $asset_id = $this->getDatabase()->loadResult();
 
-        $this->db->setQuery('UPDATE #__categories SET asset_id = id + ' . ($asset_id - 8) . ' WHERE id > 8');
-        $this->db->execute();
+        $this->getDatabase()->setQuery('UPDATE #__categories SET asset_id = id + ' . ($asset_id - 8) . ' WHERE id > 8');
+        $this->getDatabase()->execute();
 
-        $table = new \Joomla\CMS\Table\Asset($this->db, $this->getDispatcher());
+        $table = new \Joomla\CMS\Table\Asset($this->getDatabase(), $this->getDispatcher());
         $table->rebuild();
 
         $response            = [];
@@ -264,10 +264,10 @@ class PlgSampledataJed extends CMSPlugin
             // If the query isn't empty and is not a MySQL or PostgreSQL comment, execute it.
             if (!empty($query) && ($query[0] != '#') && ($query[0] != '-')) {
                 // Execute the query.
-                $this->db->setQuery($query);
+                $this->getDatabase()->setQuery($query);
 
                 try {
-                    $this->db->execute();
+                    $this->getDatabase()->execute();
                 } catch (\RuntimeException $e) {
                     Factory::getApplication()->enqueueMessage($e->getMessage(), 'error');
 
@@ -341,5 +341,9 @@ class PlgSampledataJed extends CMSPlugin
         }
 
         return $queries;
+    }
+    public static function getSubscribedEvents(): array
+    {
+        return ['onSampledataGetOverview' => 'onSampledataGetOverview', 'onAjaxSampledataApplyStep1' => 'onAjaxSampledataApplyStep1', 'onAjaxSampledataApplyStep2' => 'onAjaxSampledataApplyStep2', 'onAjaxSampledataApplyStep3' => 'onAjaxSampledataApplyStep3', 'onAjaxSampledataApplyStep4' => 'onAjaxSampledataApplyStep4', 'onAjaxSampledataApplyStep5' => 'onAjaxSampledataApplyStep5', 'onAjaxSampledataApplyStep6' => 'onAjaxSampledataApplyStep6', 'onAjaxSampledataApplyStep7' => 'onAjaxSampledataApplyStep7'];
     }
 }

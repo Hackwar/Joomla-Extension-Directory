@@ -110,8 +110,8 @@ class VelvulnerableitemTable extends Table
     {
         // Support multi file field: xml_manifest
         $app   = Factory::getApplication();
-        $files = $app->input->files->get('jform', [], 'raw');
-        $array = $app->input->get('jform', [], 'ARRAY');
+        $files = $app->getInput()->files->get('jform', [], 'raw');
+        $array = $app->getInput()->get('jform', [], 'ARRAY');
 
         if ($files['xml_manifest'][0]['size'] > 0) {
             // Deleting existing files

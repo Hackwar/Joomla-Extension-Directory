@@ -39,7 +39,7 @@ try {
 try {
     $lastvisit_date  = date_format(new dateTime($ticket_reviewer->lastvisitDate), "d-m-Y H:i");
     $lastvisit_date2 = date_format(new dateTime($sample_reviewer->lastvisitDate), "d-m-Y H:i");
-} catch (Exception $e) {
+} catch (Exception) {
 }
 
 ?>

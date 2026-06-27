@@ -106,7 +106,7 @@ class HtmlView extends BaseHtmlView
             throw new GenericDataException($e->getMessage(), 500, $e);
         }
         $app          = Factory::getApplication();
-        $input        = $app->input->getInputForRequestMethod();
+        $input        = $app->getInput()->getInputForRequestMethod();
         $this->task   = $input->get('task', '');
         $this->addToolbar();
 

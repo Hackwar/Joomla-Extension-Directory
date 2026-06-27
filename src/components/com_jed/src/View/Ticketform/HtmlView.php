@@ -144,7 +144,7 @@ class HtmlView extends BaseHtmlView
             $this->canSave    = JedHelper::canSave();
             $this->form       = $model->getForm();
 
-            $input         = $app->input;
+            $input         = $app->getInput();
             $linked_id     = $input->get('lid', -1, 'int');
             $linked_item   = $input->get('litem', -1, 'int');
             $vr            = $input->get('vr', -1, 'int');

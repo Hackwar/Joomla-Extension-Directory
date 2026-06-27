@@ -73,7 +73,7 @@ class ExtensionHistoryTable extends Table
     {
         $date = Factory::getDate();
         $app  = Factory::getApplication();
-        $task = $app->input->get('task');
+        $task = $app->getInput()->get('task');
 
 
         // Support for alias field: alias
