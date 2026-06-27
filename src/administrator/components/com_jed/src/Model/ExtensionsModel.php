@@ -76,36 +76,6 @@ class ExtensionsModel extends ListModel
     }
 
     /**
-     * Get an array of data items
-     *
-     * @return mixed Array of data items on success, false on failure.
-     *
-     * @since 4.0.0
-     */
-    public function getItems(): mixed
-    {
-        $items = parent::getItems();
-        $db    = $this->getDatabase();
-
-        $query = $db->getQuery(true)
-            ->select('COUNT(' . $db->quoteName('id') . ')')
-            ->from($db->quoteName('#__jed_reviews'));
-        if ($items) {
-            array_walk(
-                $items,
-                static function ($item) use ($db, $query) {
-                    $query->clear('where')->where($db->quoteName('extension_id') . ' = ' . (int) $item->id)->where($db->quoteName('published') . ' = 1');
-                    $db->setQuery($query);
-                    $item->reviewCount = $db->loadResult();
-                }
-            );
-            return $items;
-        } else {
-            return [];
-        }
-    }
-
-    /**
      * Build an SQL query to load the list data.
      *
      * @return QueryInterface
@@ -126,8 +96,8 @@ class ExtensionsModel extends ListModel
                 $db->quoteName(
                     [
                     'a.id',
-                        'varied.title',
-                        'varied.alias',
+                    'a.title',
+                    'a.alias',
                     'a.created_by',
                     'a.modified_on',
                     'a.created_on',
@@ -169,17 +139,11 @@ class ExtensionsModel extends ListModel
                 $db->quoteName('#__users', 'staff')
                 . ' ON ' . $db->quoteName('staff.id') . ' = ' . $db->quoteName('a.checked_out')
             )
-            ->leftJoin(
-                $db->quoteName('#__jed_extension_varied_data', 'varied')
-                . ' ON ' . $db->quoteName('varied.extension_id') . ' = ' . $db->quoteName('a.id')
-            )
-            ->leftJoin(
-                $db->quoteName('#__jed_extension_supply_options', 'supply_type')
-                . ' ON ' . $db->quoteName('supply_type.id') . ' = ' . $db->quoteName('varied.supply_option_id')
-            )
-            ->select('GROUP_CONCAT(`supply_type`.`title`) as type');
-
-        $query->where('varied.is_default_data=1');
+            ->select(
+                '(SELECT COUNT(*) FROM ' . $db->quoteName('#__jed_extensions_history') . ' h'
+                . ' WHERE ' . $db->quoteName('h.extension_id') . ' = ' . $db->quoteName('a.id') . ') AS '
+                . $db->quoteName('versions')
+            );
 
         // Filter by published state
         $published = $this->getState('filter.state');

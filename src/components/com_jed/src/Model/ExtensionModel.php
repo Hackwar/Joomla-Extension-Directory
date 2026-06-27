@@ -199,21 +199,7 @@ class ExtensionModel extends ItemModel
         }
 
         // Load Category Hierarchy
-        $this->item->category_hierarchy = $this->getCategoryHierarchy($this->item->primary_category_id);
-
-        // Load Varied Data
-        $this->item->varied_data = $this->getVariedData($this->item->id);
-
-        foreach ($this->item->varied_data as $v) {
-            if ($v->is_default_data !== 1) {
-                continue;
-            }
-            $this->item->title = $v->title;
-            $this->item->alias = $v->alias;
-
-            $this->item->intro_text   = $v->intro_text;
-            $this->item->support_link = $v->support_link;
-        }
+        $this->item->category_hierarchy = $this->getCategoryHierarchy($this->item->catid);
 
         // Load Scores
         $this->item->scores            = $this->getScores($this->item->id);
@@ -259,7 +245,7 @@ class ExtensionModel extends ItemModel
         }
 
         $this->item->developer_email   = JedHelper::getUserById($this->item->created_by)->email;
-        $this->item->developer_company = $this->getDeveloperName($this->item->created_by);
+        //$this->item->developer_company = $this->getDeveloperName($this->item->created_by);
 
         return $this->item;
     }

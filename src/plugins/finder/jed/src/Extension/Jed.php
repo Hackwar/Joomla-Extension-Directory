@@ -108,7 +108,7 @@ final class Jed extends Adapter
     public function onFinderCategoryChangeState($extension, $pks, $value)
     {
         // Make sure we're handling com_jed categories.
-        if ($extension === 'com_content') {
+        if ($extension === 'com_jed') {
             $this->categoryStateChange($pks, $value);
         }
     }
@@ -304,11 +304,11 @@ final class Jed extends Adapter
         $item->state = $this->translateState($item->state, $item->cat_state);
 
         // Add the type taxonomy data.
-        $item->addTaxonomy('Type', 'Article');
+        $item->addTaxonomy('Type', 'Extension');
 
         // Add the author taxonomy data.
         if (!empty($item->author) || !empty($item->created_by_alias)) {
-            $item->addTaxonomy('Author', !empty($item->created_by_alias) ? $item->created_by_alias : $item->author, $item->state);
+            $item->addTaxonomy('Owner', !empty($item->created_by_alias) ? $item->created_by_alias : $item->author, $item->state);
         }
 
         // Add the category taxonomy data.

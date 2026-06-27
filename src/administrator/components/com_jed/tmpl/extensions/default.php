@@ -77,6 +77,9 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
                         <td scope="col" class="w-1  d-none d-md-table-cell">
                             <?php echo HTMLHelper::_('searchtools.sort', 'COM_JED_EXTENSION_APPROVED_LABEL', 'extensions.approved', $listDirn, $listOrder); ?>
                         </td>
+                        <td scope="col" class="w-1 d-none d-md-table-cell text-center">
+                            <?php echo Text::_('COM_JED_EXTENSION_HISTORY_LABEL'); ?>
+                        </td>
                         <td scope="col" class="w-20 d-none d-md-table-cell">
                         <?php echo HTMLHelper::_('searchtools.sort', 'COM_JED_GENERAL_TITLE_LABEL', 'extensions.title', $listDirn, $listOrder); ?>
                         </td>
@@ -92,6 +95,9 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
                         </td>
                         <td scope="col" class="w-10 d-none d-md-table-cell ">
                             <?php echo HTMLHelper::_('searchtools.sort', 'COM_JED_EXTENSION_REVIEWCOUNT_LABEL', 'extensions.reviewcount', $listDirn, $listOrder); ?>
+                        </td>
+                        <td scope="col" class="w-5 d-none d-md-table-cell ">
+                            <?php echo Text::_('COM_JED_EXTENSION_VERSIONS_LABEL'); ?>
                         </td>
                         <td scope="col" class="w-10 d-none d-md-table-cell ">
                             <?php echo HTMLHelper::_('searchtools.sort', 'COM_JED_EXTENSION_LAST_UPDATED_LABEL', 'extensions.modified_on', $listDirn, $listOrder); ?>
@@ -171,6 +177,14 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
                                 echo '<span class="icon-' . $icon . '" aria-hidden="true"></span>';
                                 ?>
                             </td>
+                            <td class="text-center">
+                                <a href="#"
+                                   class="jed-history-btn"
+                                   data-extension-id="<?php echo (int) $item->id; ?>"
+                                   title="<?php echo Text::_('COM_JED_EXTENSION_HISTORY_LABEL'); ?>">
+                                    <span class="icon-list-alt" aria-hidden="true"></span>test
+                                </a>
+                            </td>
                             <td>
                                 <div class="pull-left break-word">
                                     <?php if ($item->checked_out) : ?>
@@ -198,6 +212,9 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
                             </td>
                             <td>
                                 <?php echo $item->reviewCount; ?>
+                            </td>
+                            <td>
+                                <?php echo (int) $item->versions; ?>
                             </td>
                             <td>
                                 <?php
@@ -230,3 +247,83 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
         </div>
     </div>
 </form>
+
+<!-- History Modal -->
+<div class="modal fade" id="jed-history-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><?php echo Text::_('COM_JED_EXTENSION_HISTORY_LABEL'); ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="<?php echo Text::_('JCLOSE'); ?>"></button>
+            </div>
+            <div class="modal-body" id="jed-history-modal-body">
+                <div class="text-center py-4">
+                    <div class="spinner-border text-secondary" role="status">
+                        <span class="visually-hidden"><?php echo Text::_('JLOADING'); ?></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+(function () {
+    'use strict';
+
+    var modalEl  = document.getElementById('jed-history-modal');
+    var modalBody = document.getElementById('jed-history-modal-body');
+    var bsModal  = bootstrap.Modal.getOrCreateInstance(modalEl);
+    var currentExtId = 0;
+
+    function historyUrl(extensionId) {
+        return 'index.php?option=com_jed&view=extension&layout=historylist&id=' + extensionId + '&tmpl=component';
+    }
+
+    function loadHistory(extensionId) {
+        currentExtId = extensionId;
+        modalBody.innerHTML = '<div class="text-center py-4"><div class="spinner-border text-secondary" role="status"></div></div>';
+        fetch(historyUrl(extensionId))
+            .then(function (r) { return r.text(); })
+            .then(function (html) { modalBody.innerHTML = html; });
+    }
+
+    // Open modal on history button click
+    document.addEventListener('click', function (e) {
+        var btn = e.target.closest('.jed-history-btn');
+        if (!btn) { return; }
+        e.preventDefault();
+        loadHistory(btn.dataset.extensionId);
+        bsModal.show();
+    });
+
+    // Activate version – delegated to modal body (content loaded dynamically)
+    modalEl.addEventListener('click', function (e) {
+        var link = e.target.closest('.jed-activate-version');
+        if (!link) { return; }
+        e.preventDefault();
+
+        var extensionId = link.dataset.extensionId;
+        var versionId   = link.dataset.versionId;
+        var tokenName   = Joomla.getOptions('csrf.token');
+        var formData    = new FormData();
+        formData.append(tokenName, '1');
+
+        link.closest('tr').style.opacity = '0.4';
+
+        fetch(
+            'index.php?option=com_jed&task=extension.activateVersion&extension_id=' + extensionId + '&id=' + versionId,
+            { method: 'POST', body: formData }
+        ).then(function () {
+            loadHistory(extensionId);
+        });
+    });
+
+    // Clear body on close so stale content is not shown on next open
+    modalEl.addEventListener('hidden.bs.modal', function () {
+        modalBody.innerHTML = '';
+        currentExtId = 0;
+    });
+}());
+</script>

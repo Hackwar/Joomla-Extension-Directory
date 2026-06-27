@@ -16,6 +16,7 @@ DROP TABLE IF EXISTS `#__jed_extensions_approved_reasons`;
 DROP TABLE IF EXISTS `#__jed_extensions_categories`;
 DROP TABLE IF EXISTS `#__jed_extensions_logos`;
 DROP TABLE IF EXISTS `#__jed_extensions_favoured`;
+DROP TABLE IF EXISTS `#__jed_extensions_maintainers`;
 DROP TABLE IF EXISTS `#__jed_extensions_files`;
 DROP TABLE IF EXISTS `#__jed_extensions_joomla_versions`;
 DROP TABLE IF EXISTS `#__jed_extensions_notes`;

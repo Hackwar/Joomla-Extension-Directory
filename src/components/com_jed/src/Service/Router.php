@@ -75,9 +75,6 @@ class Router extends RouterView
         $this->setDatabase($db);
         $this->setMVCFactory($factory);
 
-        $homepage = new RouterViewConfiguration('homepage');
-        $this->registerView($homepage);
-
         // Extensions
         $categories = new RouterViewConfiguration('categories');
         $categories->setKey('id');
@@ -99,6 +96,9 @@ class Router extends RouterView
 
         $extensionform = new RouterViewConfiguration('extensionform');
         $this->registerView($extensionform);
+
+        $dashboard = new RouterViewConfiguration('dashboard');
+        $this->registerView($dashboard);
         $extensionvarieddatum = new RouterViewConfiguration('extensionvarieddatum');
         $this->registerView($extensionvarieddatum);
 
@@ -293,8 +293,8 @@ class Router extends RouterView
         $db        = $this->getDatabase();
         $query     = $db->getQuery(true);
         $query->select($db->quoteName('alias'))
-            ->from($db->quoteName('#__jed_extension_varied_data'))
-            ->where($db->quoteName('extension_id') . ' = :id')
+            ->from($db->quoteName('#__jed_extensions'))
+            ->where($db->quoteName('id') . ' = :id')
             ->bind(':id', $id, ParameterType::INTEGER);
         $db->setQuery($query);
 
@@ -398,38 +398,4 @@ class Router extends RouterView
     }
 
 
-    public function getVelabandonedreportId($segment, $query)
-    {
-        return $segment;
-    }
-
-
-    public function getVelabandonedreportSegment($id, $query)
-    {
-        return [$id];
-    }
-
-
-    public function getVeldeveloperupdateId($segment, $query)
-    {
-        return $segment;
-    }
-
-
-    public function getVeldeveloperupdateSegment($id, $query)
-    {
-        return [$id];
-    }
-
-
-    public function getVelreportId($segment, $query)
-    {
-        return $segment;
-    }
-
-
-    public function getVelreportSegment($id, $query)
-    {
-        return [$id];
-    }
 }

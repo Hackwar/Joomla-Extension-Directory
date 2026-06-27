@@ -7,7 +7,7 @@
  * @license   GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-namespace Jed\Component\Jed\Site\View\Extension;
+namespace Jed\Component\Jed\Site\View\Dashboard;
 
 // No direct access
 // phpcs:disable PSR1.Files.SideEffects
@@ -15,31 +15,25 @@ namespace Jed\Component\Jed\Site\View\Extension;
 // phpcs:enable PSR1.Files.SideEffects
 
 use Exception;
-use Joomla\CMS\MVC\View\GenericDataException;
-use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
+use Jed\Component\Jed\Site\Model\DashboardModel;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\MVC\View\GenericDataException;
+use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use Joomla\Registry\Registry;
 
 /**
- * View class for an individual Extension
+ * Dashboard view class.
  *
  * @since 4.0.0
  */
 class HtmlView extends BaseHtmlView
 {
-    protected Registry $state;
-
-    protected mixed $item;
-
-    protected mixed $form;
-    /**
-     * Get the Params
-     *
-     * @var   Registry
-     * @since 4.0.0
-     */
+    protected array $reviews          = [];
+    protected array $extensions  = [];
+    protected array $tickets          = [];
     protected Registry $params;
+    protected Registry $state;
 
     /**
      * Display the view
@@ -54,26 +48,18 @@ class HtmlView extends BaseHtmlView
      */
     public function display($tpl = null): void
     {
-        $app          = Factory::getApplication();
-        $user         = $this->getCurrentUser();
-        $model        = $this->getModel();
+        /** @var DashboardModel $model */
+        $model = $this->getModel();
         $model->setUseExceptions(true);
-        $this->state  = $model->getState();
-        $this->item   = $model->getItem();
-        $this->params = $app->getParams('com_jed');
-        //$this->form   = $model->getForm();
 
-
-
-        if ($this->_layout == 'edit') {
-            $authorised = $user->authorise('core.create', 'com_jed');
-
-            if ($authorised !== true) {
-                throw new Exception(Text::_('JERROR_ALERTNOAUTHOR'));
-            }
-        }
+        $this->reviews         = $model->getReviews();
+        $this->extensions = $model->getExtensions();
+        $this->tickets         = $model->getTickets();
+        $this->state           = $model->getState();
+        $this->params          = Factory::getApplication()->getParams();
 
         $this->prepareDocument();
+
         parent::display($tpl);
     }
 
@@ -90,15 +76,12 @@ class HtmlView extends BaseHtmlView
     {
         $app   = Factory::getApplication();
         $menus = $app->getMenu();
-
-        // Because the application sets a default page title,
-        // We need to get it from the menu item itself
-        $menu = $menus->getActive();
+        $menu  = $menus->getActive();
 
         if ($menu) {
             $this->params->def('page_heading', $this->params->get('page_title', $menu->title));
         } else {
-            $this->params->def('page_heading', Text::_('COM_JED_DEFAULT_PAGE_TITLE'));
+            $this->params->def('page_heading', Text::_('COM_JED_DASHBOARD_TITLE'));
         }
 
         $title = $this->params->get('page_title', '');
@@ -125,15 +108,8 @@ class HtmlView extends BaseHtmlView
             $this->getDocument()->setMetadata('robots', $this->params->get('robots'));
         }
 
-
-        // Add Breadcrumbs
-        $pathway        = $app->getPathway();
-        $breadcrumbList = Text::_('COM_JED_EXTENSIONS');
-
-        if (!in_array($breadcrumbList, $pathway->getPathwayNames())) {
-            $pathway->addItem($breadcrumbList, "index.php?option=com_jed&view=extensions");
-        }
-        $breadcrumbTitle = Text::_('COM_JED_EXTENSION');
+        $pathway         = $app->getPathway();
+        $breadcrumbTitle = Text::_('COM_JED_DASHBOARD_TITLE');
 
         if (!in_array($breadcrumbTitle, $pathway->getPathwayNames())) {
             $pathway->addItem($breadcrumbTitle);

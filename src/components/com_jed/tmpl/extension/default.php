@@ -150,16 +150,14 @@ $wa->useStyle('com_jed.jazstyle');
         <?php
         echo HTMLHelper::_('uitab.startTabSet', 'supply_option_tabs') ?>
         <?php
-        $varieddata = $this->item->varied_data;
         $tabid              = 0;
-        foreach ($varieddata as $vr) {
-            //  echo "<pre>";print_r($vr);echo "</pre>";
-            echo HTMLHelper::_('uitab.addTab', 'supply_option_tabs', 'supply_tab_' . $vr->supply_type, $vr->supply_type);
-            $subItemId  = md5(serialize($vr));
+            //  echo "<pre>";print_r($this->item);echo "</pre>";
+            echo HTMLHelper::_('uitab.addTab', 'supply_option_tabs', 'supply_tab_' . $this->item->supply_type, $this->item->supply_type);
+            $subItemId  = md5(serialize($this->item));
             ?>
         <div class="jed-wrapper jed-extension margin-bottom">
             <div class="jed-extension__image">
-                <?php if ($vr->logo) : ?>
+                <?php if ($this->item->logo) : ?>
                     <img src=" <?php echo $this->item->logo ?>" alt=" <?php echo $this->escape($this->item->title) ?>"
                          class="rounded img-fluid mx-auto d-block" style="max-height: 525px">
                 <?php endif; ?>
@@ -167,8 +165,8 @@ $wa->useStyle('com_jed.jazstyle');
             <div class="jed-grid jed-grid--2-1 margin-bottom">
                 <div class="jed-grid__item">
                     <div class="jed-subitem-intro mb-2">
-                         <?php echo $vr->intro_text ?>
-                        <?php if (!empty(trim(strip_tags($vr->description)))) : ?>
+                         <?php echo $this->item->intro_text ?>
+                        <?php if (!empty(trim(strip_tags($this->item->description)))) : ?>
                             <?php HTMLHelper::_('bootstrap.collapse') ?>
                             <button type="button" class="btn btn-sm btn-outline-secondary my-2"
                                     data-bs-toggle="collapse" href="#description-<?php echo $subItemId ?>"
@@ -180,15 +178,15 @@ $wa->useStyle('com_jed.jazstyle');
                     </div>
 
                     <div class="jed-subitem-description mb-2 collapse" id="description-<?php echo $subItemId ?>">
-                         <?php echo $vr->description ?>
+                         <?php echo $this->item->description ?>
                     </div>
 
                     <p class="button-group">
-                        <a href=" <?php echo $vr->homepage_link ?>" class="button button--grey">Website</a>
-                        <a href=" <?php echo $vr->demo_link ?>" class="button button--grey">Demo</a>
-                        <a href=" <?php echo $vr->documentation_link ?>" class="button button--grey">Documentation</a>
-                        <a href=" <?php echo $vr->support_link ?>" class="button button--grey">Support</a>
-                        <a href=" <?php echo $vr->license_link ?>" class="button button--grey">License</a>
+                        <a href=" <?php echo $this->item->homepage_link ?>" class="button button--grey">Website</a>
+                        <a href=" <?php echo $this->item->demo_link ?>" class="button button--grey">Demo</a>
+                        <a href=" <?php echo $this->item->documentation_link ?>" class="button button--grey">Documentation</a>
+                        <a href=" <?php echo $this->item->support_link ?>" class="button button--grey">Support</a>
+                        <a href=" <?php echo $this->item->license_link ?>" class="button button--grey">License</a>
                     </p>
                 </div>
                 <div class="jed-grid__item">
@@ -197,7 +195,7 @@ $wa->useStyle('com_jed.jazstyle');
 
                             <?php
 
-                            $url =  Route::_('index.php?option=com_jed&view=ticketform&litem=2&lid=' . $this->item->id . '&vr=' . $vr->id)
+                            $url =  Route::_('index.php?option=com_jed&view=ticketform&litem=2&lid=' . $this->item->id . '&vr=' . $this->item->id)
                             ?>
                             <a href="<?php echo $url; ?>" class="button button--grey">Report</a>
                             <a href="#" class="button button--grey">Share</a>
@@ -209,13 +207,13 @@ $wa->useStyle('com_jed.jazstyle');
 
             <div class="jed-grid jed-grid--1-2">
                 <div class="jed-grid__item">
-                    <h2 class="heading heading--m">Reviews for <?php echo $vr->supply_type; ?> version</h2>
+                    <h2 class="heading heading--m">Reviews for <?php echo $this->item->supply_type; ?> version</h2>
                     <hr>
                     <?php
                     $slidesOptions = [];
                     echo HTMLHelper::_('bootstrap.startAccordion', 'review_extension_group', $slidesOptions);
                     $slideid = 0;
-                    foreach ($this->item->reviews[$vr->supply_type] as $rev) {
+                    foreach ($this->item->reviews[$this->item->supply_type] as $rev) {
                         echo HTMLHelper::_(
                             'bootstrap.addSlide',
                             'review_extension_group',
@@ -230,7 +228,6 @@ $wa->useStyle('com_jed.jazstyle');
                         echo "<p>Value For Money (" . $rev->value_for_money . ") - " . $rev->value_for_money_comment . "</p>";
                         echo "<p>Used for - " . $rev->used_for . "</p>";
                         echo HTMLHelper::_('bootstrap.endSlide');
-                    }
                     echo HTMLHelper::_('bootstrap.endAccordion');
 
                     ?>
