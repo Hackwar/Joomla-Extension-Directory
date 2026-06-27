@@ -693,7 +693,7 @@ class JedHelper
     {
         return match ($view) {
             'extension', 'extensionform', 'review', 'reviewform' => 'alias',
-            default => "",
+            default                                              => "",
         };
     }
 

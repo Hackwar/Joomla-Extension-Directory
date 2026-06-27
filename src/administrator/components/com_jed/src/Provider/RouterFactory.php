@@ -38,8 +38,7 @@ class RouterFactory implements ServiceProviderInterface
          * @since 4.0.0
          */
         private readonly string $namespace
-    )
-    {
+    ) {
     }
 
     /**
@@ -51,7 +50,7 @@ class RouterFactory implements ServiceProviderInterface
     {
         $container->set(
             RouterFactoryInterface::class,
-            fn(Container $container) => new \Jed\Component\Jed\Administrator\Service\RouterFactory(
+            fn (Container $container) => new \Jed\Component\Jed\Administrator\Service\RouterFactory(
                 $this->namespace,
                 $container->get(DatabaseInterface::class),
                 $container->get(MVCFactoryInterface::class),

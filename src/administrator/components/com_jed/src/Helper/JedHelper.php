@@ -213,7 +213,7 @@ class JedHelper
             // Approved
             '1' => 'publish',
             // Awaiting response
-            '2' => 'expired',
+            '2'     => 'expired',
             default => 'pending',
         };
 
@@ -260,7 +260,7 @@ class JedHelper
             // Approved
             '1' => 'publish',
             // Awaiting response
-            '2' => 'expired',
+            '2'     => 'expired',
             default => 'pending',
         };
 

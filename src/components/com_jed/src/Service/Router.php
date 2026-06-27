@@ -64,7 +64,7 @@ class Router extends RouterView
      *
      * @since 4.0.0
      */
-    private CategoryFactoryInterface $categoryFactory)
+        private CategoryFactoryInterface $categoryFactory)
     {
         parent::__construct($app, $menu);
         $this->setDatabase($db);

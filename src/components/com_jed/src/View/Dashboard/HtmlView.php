@@ -30,7 +30,7 @@ use Joomla\Registry\Registry;
 class HtmlView extends BaseHtmlView
 {
     protected array $reviews          = [];
-    protected array $extensions  = [];
+    protected array $extensions       = [];
     protected array $tickets          = [];
     protected Registry $params;
     protected Registry $state;
@@ -53,7 +53,7 @@ class HtmlView extends BaseHtmlView
         $model->setUseExceptions(true);
 
         $this->reviews         = $model->getReviews();
-        $this->extensions = $model->getExtensions();
+        $this->extensions      = $model->getExtensions();
         $this->tickets         = $model->getTickets();
         $this->state           = $model->getState();
         $this->params          = Factory::getApplication()->getParams();

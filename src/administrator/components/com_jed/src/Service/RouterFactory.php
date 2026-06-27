@@ -59,8 +59,7 @@ class RouterFactory implements RouterFactoryInterface
          * @since 4.0.0
          */
         private readonly CategoryFactoryInterface $categoryFactory
-    )
-    {
+    ) {
     }
 
 
